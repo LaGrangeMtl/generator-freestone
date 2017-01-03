@@ -1,0 +1,79 @@
+html {
+	font-size: 100%;
+}
+
+body {
+	background: $color-background-main;
+
+	&.opened {
+		overflow: hidden;
+	}
+}
+
+@include at-most($screen-xs-max) {
+	.container {
+		width: 100%;
+	}
+}
+
+.big-wrap {
+	width: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+}
+
+.overlay {
+	visibility: hidden;
+	opacity: 0;
+	z-index: 50;
+	position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+	background: rgba($black, 0.1);
+
+	will-change: opacity;
+
+	transition: visibility 0s linear 0.6s, opacity 0.6s $easeInOutCubic;
+
+	.opened & {
+		visibility: visible;
+		opacity: 1;
+		transition: visibility 0s linear 0s, opacity 0.6s $easeInOutCubic;
+	}
+}
+
+ol {
+	padding-left: 50px;
+	position: relative;
+	list-style: none;
+	counter-reset: ol 0;
+
+	li {
+		margin-bottom: 20px;
+		
+		&:before {
+			position: absolute;
+			left: 0;
+			content: counter(ol) '.';
+			counter-increment: ol;
+		}
+	}
+}
+
+
+table {
+	width: 100%;
+
+	td {
+		padding: 18px 0;
+		border-bottom: 1px solid $gray94;
+	}
+
+	td:nth-child(2):last-child {
+		text-align: right;
+		font-style: italic;
+		font-weight: $font-weight-light;
+	}
+}

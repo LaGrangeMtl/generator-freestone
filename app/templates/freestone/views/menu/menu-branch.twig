@@ -1,0 +1,11 @@
+{% for leaf in branch %}
+	{% set elClass = leaf.active ? 'open' : '' %}
+	<li class="{{ elClass }}">
+		{% if leaf.children %}
+			<a href="{{ leaf.link }}" class="{{ elClass }}">{{ leaf.label }}</a>
+			<ul role="menu">{{ include('menu/menu-branch.twig', {branch: leaf.children, level: level + 1}) }}</ul>
+		{% else %}
+			<a href="{{ leaf.link }}" class="{{ elClass }}">{{ leaf.label }}</a>
+		{% endif %}
+	</li>
+{% endfor %}

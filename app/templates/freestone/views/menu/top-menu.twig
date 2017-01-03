@@ -1,0 +1,16 @@
+
+<nav class="top-menu">
+	<ul class="" role="tablist">
+		{{ include('menu/menu-branch.twig', {branch: nav.top, level: 1}) }}
+		
+		{% for language in languages %}
+			<li class="{{ language.active ? 'active' : '' }}"><a href="{{ fs_link(null, null, language.key) }}">{{ language.key }}</a></li>
+		{% endfor %}
+		<li class="hidden-md hidden-lg">
+			<div class="social">
+				<a href="{{ settings.facebook_url }}" target="_blank" class="icon-facebook"></a>
+				<a href="{{ settings.instagram_url }}" target="_blank" class="icon-instagram"></a>
+			</div>
+		</li>
+	</ul>
+</nav>

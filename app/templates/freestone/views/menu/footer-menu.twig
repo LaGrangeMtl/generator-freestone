@@ -1,0 +1,6 @@
+{% set nav = fs_module('Nav') %}
+<nav class="footer-menu">
+	<ul class="" role="tablist">
+		{{ include('menu/menu-branch.twig', {branch: nav.footer, level: 1}) }}
+	</ul>
+</nav>

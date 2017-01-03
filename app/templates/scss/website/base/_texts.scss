@@ -1,0 +1,162 @@
+@mixin title($extend: false) {
+	@if $extend == true {
+		@extend %title;
+	} @else {
+		font-family: $font-family-title;
+		font-weight: $font-weight-medium;
+		line-height: 1;
+		margin: 0 0 0.5em;
+	}
+}
+
+%title {
+	@include title(false);
+}
+
+%title1 {
+	@include title();
+
+	font-size: $font-size-title1-lg;
+	font-weight: $font-weight-normal;
+
+	strong {
+		color: $color-accent-primary;
+		font-weight: inherit;
+	}
+
+	@include responsive-fontsizes((
+		$screen-md-max: $font-size-title1-md,
+		$screen-sm-max: $font-size-title1-sm,
+		$screen-xs-max: $font-size-title1-xs,
+	));
+}
+
+%title2 {
+	@include title();
+
+	font-size: $font-size-title2-lg;
+	font-weight: $font-weight-normal;
+	
+	@include responsive-fontsizes((
+		$screen-md-max: $font-size-title2-md,
+		$screen-sm-max: $font-size-title2-sm,
+		$screen-xs-max: $font-size-title2-xs,
+	));
+}
+
+%title3 {
+	@include title();
+
+	letter-spacing: 0.05em;
+
+	font-size: $font-size-title3-lg;
+	@include responsive-fontsizes((
+		$screen-md-max: $font-size-title3-md,
+		$screen-sm-max: $font-size-title3-sm,
+		$screen-xs-max: $font-size-title3-xs,
+	));
+}
+
+
+%title4 {
+	@include title();
+
+	text-transform: none;
+	font-size: $font-size-title4-lg;
+	@include responsive-fontsizes((
+		$screen-md-max: $font-size-title4-md,
+		$screen-sm-max: $font-size-title4-sm,
+		$screen-xs-max: $font-size-title4-xs,
+	));
+}
+
+@mixin text($extend: false) {
+	@if $extend == true {
+		@extend %text;
+	} @else {
+		font-family: $font-family-text;
+		font-size: $font-size-text-lg;
+		font-weight: $font-weight-normal;
+
+		@include responsive-fontsizes((
+			$screen-md-max: $font-size-text-md,
+			$screen-sm-max: $font-size-text-sm,
+			$screen-xs-max: $font-size-text-xs,
+		));
+	}
+}
+
+%text {
+	@include text();
+}
+
+
+@mixin button-text($extend: false) {
+	@if $extend == true {
+		@extend %button_text;
+	} @else {
+		font-size: fs(14px);
+		line-height: fs(14px);
+		font-weight: $font-weight-normal;
+		font-style: italic;
+	}
+}
+
+%button_text {
+	@include button-text();
+}
+
+* {
+	-webkit-font-smoothing: antialiased;
+}
+
+
+body {
+	@extend %text;
+	line-height: 1.4;
+	color: $color-text-primary;
+}
+
+h1 {
+	@extend %title1;
+}
+
+h2 {
+	@extend %title2;
+}
+
+h3 {
+	@extend %title3;
+}
+
+h4 {
+	@extend %title4;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 1em;
+
+	&.small {
+		font-size: fs(14px);
+	}
+}
+
+a:not([class]) {
+	color: $color-accent-primary;
+	text-decoration: underline;
+	font-style: normal;
+	font-weight: $font-weight-bold;
+
+	&:hover {
+		color: $color-accent-primary_hover;
+	}
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: $font-weight-bold;
+}

@@ -1,0 +1,24 @@
+{% set page = fs_query({
+	table: "page",
+	recordId: rootId,
+	debug: false,
+}) %}
+<!doctype html>
+<html class="no-js">
+	<head>
+		{{ include('partials/head.twig') }}
+
+		{{ include('partials/share-metas.twig', {title: page.title_lng ~ ' | ' ~ settings.site_name}) }}
+
+		<title>{{ page.title_lng }} | {{ settings.site_name }}</title>
+	</head>
+	<body class="">
+		{{ include('menu/head-menu.twig') }}
+	
+		{{ include('blocks/content-block.twig') }}
+		
+		{{ include('partials/footer.twig') }}
+
+		{{ include('partials/footer-scripts.twig') }}
+	</body>
+</html>

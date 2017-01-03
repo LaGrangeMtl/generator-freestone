@@ -1,0 +1,25 @@
+{# Liste des blocks peut être limité par include param contentBlockTypes qui est une liste de types sous forme de liste mysql IN #}
+{% set contentBlocks = fs_query({
+	id:'content-blocks',
+	table:'content_block',
+	hasOne: [
+		{
+			table: 'content_block_type',
+			alias: 'type'
+		},
+	],
+	order: ['content_block.`order` ASC'],
+	parentLink: 'root',
+	where: [ contentBlockTypes ? "`type`.code IN (" ~ contentBlockTypes ~ ")" : "1" ],
+	debug: false
+}) %}
+
+{% for contentBlock in contentBlocks %}
+	{% if contentBlock.type.code != 'include' %}
+		{{ include('blocks/content-blocks/' ~ contentBlock.type.code ~ '.twig') }}
+	{% else %}
+		{{ include('blocks/content-blocks/' ~ contentBlock.include ~ '.twig') }}
+	{% endif %}
+{% endfor %}
+
+
