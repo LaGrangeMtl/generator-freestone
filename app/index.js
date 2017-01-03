@@ -158,9 +158,7 @@ this.log(chalk.magenta(
 	},
 
 	writeIndex : function () {
-		var indexFile = this.readFileAsString(path.join(this.sourceRoot(), '/page.htm'));
-		indexFile = this.engine(indexFile, this);
-		this.indexFile = indexFile;
+		
 	},
 
 	app: function () {
