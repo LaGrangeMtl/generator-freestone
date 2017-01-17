@@ -16,9 +16,8 @@ setPermissions
 # deploy uploads - should be runned only once.
 # rsync -avzLR --progress --no-p --groupmap=*:webmasters ./c/<%= props.projectNamespace %>/uploads ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/
 # create the _cache folder, only once too
-# ssh ubuntu@enclos.ca "sudo mkdir /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache && sudo chmod -R 755 /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %/_cache"
-
-
+# ssh ubuntu@enclos.ca "sudo mkdir /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache && sudo chmod -R 775 /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache"
+	
 	#prend les fichiers de lang et les imgdb, etc. (doit être actif si le client peut changer les langs)
 	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/smartika.enclos.ca/public_html/c/smartika/admin/thumbnails ./admin/
 	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/smartika.enclos.ca/public_html/c/smartika/lang .
