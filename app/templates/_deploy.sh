@@ -18,6 +18,12 @@ setPermissions
 # create the _cache folder, only once too
 # ssh ubuntu@enclos.ca "sudo mkdir /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache && sudo chmod -R 755 /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %/_cache"
 
+
+	#prend les fichiers de lang et les imgdb, etc. (doit être actif si le client peut changer les langs)
+	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/smartika.enclos.ca/public_html/c/smartika/admin/thumbnails ./admin/
+	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/smartika.enclos.ca/public_html/c/smartika/lang .
+	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/smartika.enclos.ca/public_html/c/smartika/uploads .
+
 rsync -avzL --progress --no-p --groupmap=*:webmasters --exclude-from=.rsync.exclude . ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/
 
 rsync -avzL --progress --no-p --groupmap=*:webmasters ./c/<%= props.projectNamespace %>/config/. ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html
