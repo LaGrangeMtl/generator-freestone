@@ -55,6 +55,8 @@ VEnv::$defaultID = 1;
 VEnv::$defaultLang = 'fr';
 VEnv::$defaultTable = 'page';
 
+VEnv::$fieldBasedTplNames = ['zva_admin_page'=>'template', 'page'=>'template'];
+
 VEnv::$salt = '<%= props.salt %>';
 VEnv::$secret = '<%= props.secret %>';
 
