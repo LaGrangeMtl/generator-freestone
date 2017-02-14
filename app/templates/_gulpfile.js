@@ -28,7 +28,7 @@ var JSCONF = (function(){
 
 	//les libs définies dans package.json et bower.json -> dependencies seront toutes externes. On peut aussi en ajouter ici au besoin.
 	var external = getAllExternalPackageIds([
-		':greensock',
+		':gsap',
 		':Promise',
 	]);
 	//deépendances qui ne sont addées qu'en dev
@@ -53,11 +53,11 @@ var JSCONF = (function(){
 	};
 }());
 
-var CSSCONF = {
+var CSSCONF = [{
 	src: 'scss/',
 	dest: 'css',
 	mainFile: 'main.scss',
-};
+}];
 
 
 gulp.task('libcopy', function(){
@@ -93,7 +93,10 @@ gulp.task('watch', function () {
 			bundleJs(config);
 		});
 	});
-	gulp.watch(CSSCONF.src + '**/*.scss').on('change', compileScss);
+
+	CSSCONF.forEach(function(cssConf) {
+		gulp.watch(cssConf.src + '**/*.scss').on('change', function() { compileScss(cssConf) });
+	});
 
 });
 
@@ -105,22 +108,26 @@ gulp.task('debug', function(){
 
 //***************************************************
 
-function compileScss(){
-	return gulp.src(CSSCONF.src + CSSCONF.mainFile)
+function compileScss(cssConf){
+	return gulp.src(cssConf.src + cssConf.mainFile)
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
-			browsers: ['last 2 version', 'ie 9', 'ie 10', 'ie 11']
+    		browsers: ['last 2 version', 'ie 9', 'ie 10', 'ie 11']
 		}))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(CSSCONF.dest).on('end',function(){
-			gutil.log('Sass compiled.');
+		.pipe(gulp.dest(cssConf.dest).on('end',function(){
+			gutil.log(cssConf.src + ' Sass compiled.');
 		}))
 		.pipe(livereload());
 }
 
 function getBundler(cnf, isDev){
-	var bundler = browserify(JSCONF.src + cnf.src, { debug: true }).transform(babelify, { presets: ["es2015"]});
+	var bundler = browserify(JSCONF.src + cnf.src, { debug: true })
+					.transform(babelify, {
+						presets: ['es2015'], 
+						plugins: ['transform-object-assign'],
+					});
 
 	if(cnf.external) {
 		bundler = cnf.external.reduce(function(b, lib){
