@@ -2,7 +2,7 @@
 'use strict';
 
 import $ from 'jquery';
-import docReady from './utils/docReady';
+import { docReady } from './utils/docReady';
 
 docReady.then(() => {
 	
