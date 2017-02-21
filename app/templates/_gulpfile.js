@@ -96,6 +96,7 @@ gulp.task('watch', function () {
 
 	CSSCONF.forEach(function(cssConf) {
 		gulp.watch(cssConf.src + '**/*.scss').on('change', function() { compileScss(cssConf) });
+		compileScss(cssConf);
 	});
 
 });
