@@ -18,7 +18,10 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
 var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
 var colors = require('colors');
+
+var cssmin = require('gulp-cssmin');
 
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
@@ -76,13 +79,14 @@ gulp.task('browserify:vendor', function () {
 // Without sourcemaps
 gulp.task('browserify:production', function () {
 	bundleJs(getBundler(JSCONF.app, false));
+	CSSCONF.forEach(cssConf => compileScss(cssConf, true));
 	return bundleJs(getBundler(JSCONF.vendor, false));
 });
 
 gulp.task('scss', compileScss);
 
 gulp.task('watch', function () {
-	livereload.listen();
+	livereload.listen({ start: true });
 
 	[JSCONF.app].map(function(jsCnf){
 		var config = getBundler(jsCnf, true);
@@ -109,18 +113,19 @@ gulp.task('debug', function(){
 
 //***************************************************
 
-function compileScss(cssConf){
+function compileScss(cssConf, isProd = false){
 	return gulp.src(cssConf.src + cssConf.mainFile)
-		.pipe(sourcemaps.init())
+		.pipe(gulpif(!isProd, sourcemaps.init()))
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
     		browsers: ['last 2 version', 'ie 9', 'ie 10', 'ie 11']
 		}))
-		.pipe(sourcemaps.write())
+		.pipe(gulpif(!isProd, sourcemaps.write()))
+		.pipe(gulpif(isProd, cssmin()))
 		.pipe(gulp.dest(cssConf.dest).on('end',function(){
 			gutil.log(cssConf.src + ' Sass compiled.');
 		}))
-		.pipe(livereload());
+		.pipe(gulpif(livereload.server, livereload()));
 }
 
 function getBundler(cnf, isDev){

@@ -26,13 +26,10 @@ var LagrangeGenerator = yeoman.generators.Base.extend({
 			if (!this.options['skip-install']) {
 				this.installDependencies({
 					callback: function () {
-						if(this.props.isBrowserify) {
-
-							this.spawnCommand('ln', ['-s', '../src', 'node_modules/src']);
-							this.spawnCommand('ln', ['-s', '../src/lagrange', 'node_modules/lagrange']);
-							this.spawnCommand('ln', ['-s', '../src/app', 'node_modules/'+this.props.projectNamespace]);
-							console.log('Symbolic links for browserify created');
-						}
+						this.spawnCommand('ln', ['-s', '../src', 'node_modules/src']);
+						this.spawnCommand('ln', ['-s', '../src/lagrange', 'node_modules/lagrange']);
+						this.spawnCommand('ln', ['-s', '../src/app', 'node_modules/'+this.props.projectNamespace]);
+						console.log('Symbolic links for browserify created');
 						this.spawnCommand('gulp', ['libcopy']);
 					}.bind(this)
 				});
@@ -89,18 +86,6 @@ this.log(chalk.magenta(
 				name: 'homepage',
 				type: 'input',
 				message: 'Url',
-			},
-			{
-				name: 'isBrowserify',
-				type: 'confirm',
-				message: 'Scripts gérés par browserify?',
-				default : true
-			},
-			{
-				name: 'isES6',
-				type: 'confirm',
-				message: 'Transpile ES6 avec Babelify?',
-				default : true
 			},
 			{
 				name: 'jqueryVersion',
@@ -166,9 +151,7 @@ this.log(chalk.magenta(
 		this.mkdir('js');
 		this.mkdir('css');
 
-		if(this.props.isBrowserify) {
-			this.directory('src', 'src');
-		}
+		this.directory('src', 'src');
 		this.mkdir('assets');
 		this.directory('scss', 'scss');
 
