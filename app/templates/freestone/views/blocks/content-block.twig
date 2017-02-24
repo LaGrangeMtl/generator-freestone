@@ -18,7 +18,7 @@
 	{% if contentBlock.type.code != 'include' %}
 		{{ include('blocks/content-blocks/' ~ contentBlock.type.code ~ '.twig') }}
 	{% else %}
-		{{ include('blocks/content-blocks/' ~ contentBlock.include ~ '.twig') }}
+		{{ include('blocks/content-blocks/includes/' ~ contentBlock.include ~ '.twig') }}
 	{% endif %}
 {% endfor %}
 
