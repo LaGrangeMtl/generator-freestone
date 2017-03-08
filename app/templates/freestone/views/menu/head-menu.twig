@@ -1,16 +1,4 @@
 
 {% set nav = fs_module('Nav') %}
 
-<ul role="tablist">
-	{{ include('menu/menu-branch.twig', {branch: nav.nav, level: 1}) }}
-	{% if settings.shopIsOnline %}
-		<li class="cart">
-		{% if settings.isTplGen %}
-			<a href="{{ settings.lightspeed_url }}/{% verbatim %}{{ shop.language }}{% endverbatim %}/{{ settings.lightspeed_cart_page }}"><i class="icon-basket"></i></a>
-		{% else %}
-			<a href="{{ settings.lightspeed_url }}/{{ lang == 'fr' ? 'fr' : 'en' }}/{{ settings.lightspeed_cart_page }}"><i class="icon-basket"></i></a>
-		{% endif %}
-		</li>
-	{% endif %}
-</ul>
 {{ include('menu/top-menu.twig') }}
