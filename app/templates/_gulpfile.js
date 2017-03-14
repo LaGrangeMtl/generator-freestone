@@ -132,7 +132,7 @@ function getBundler(cnf, isDev){
 	var bundler = browserify(JSCONF.src + cnf.src, { debug: true })
 					.transform(babelify, {
 						presets: ['es2015'], 
-						plugins: ['transform-object-assign'],
+						plugins: ['transform-object-assign', 'transform-exponentiation-operator'],
 					});
 
 	if(cnf.external) {
