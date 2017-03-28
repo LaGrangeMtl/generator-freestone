@@ -30,6 +30,7 @@ node_modules
 bower_components
 /vendor
 _cache
+_optimization
 
 uploads/zva_bank_img.file/[0-9]*prc
 admin/thumbnails
