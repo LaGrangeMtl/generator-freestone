@@ -33,4 +33,5 @@ _cache
 _optimization
 
 uploads/zva_bank_img.file/[0-9]*prc
+uploads/zva_bank_img.file-tiny
 admin/thumbnails
