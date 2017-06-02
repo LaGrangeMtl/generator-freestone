@@ -1,11 +1,13 @@
 
 <meta name="fb:app_id" content="{{ settings.facebook_appid }}" />
-<meta name="twitter:text:description" content="{{ title ? title : tx.share.twitter }}" />
-<meta property="og:type"  content="article" />
-<meta property="og:description" content="{{ description ? description : tx.share.facebook }}" />
+<meta name="twitter:text:description" content="{{ title|default(tx.share_defaults.twitter_desc) }}" />
 
-<meta property="og:url" content="{{ fs_link({}) }}" />
-<meta property="og:title" content="{{ title ? title : tx.share.title }}" />
-<meta property="og:image" content="{{ image ? image : 'https:' ~ dir ~ tx.share.image }}" />
+<meta property="og:site_name" content="{{ settings.site_name }}" />
+<meta property="og:type" content="{{ type|default('website') }}" />
+
+<meta property="og:description" content="{{ description|striptags|default(tx.share_defaults.description) }}" />
+<meta property="og:url" content="{{ url|default(fs_link({})) }}" />
+<meta property="og:title" content="{{ title|default(tx.share_defaults.title) }}" />
+<meta property="og:image" content="{{ 'http:' ~ image|default(dir ~ '/img/share-default.jpg') }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />

@@ -1,0 +1,20 @@
+<!doctype html>
+<html class="no-js" lang="{{ lang_specific }}">
+	<head>
+		{{ include('partials/head.twig') }}
+
+		{% block head %}
+			<title>{{ settings.site_name }}</title>
+		{% endblock head %}
+	</head>
+	<body class="{{ bodyClass }}">
+		{{ include('menu/head-menu.twig') }}
+
+		{% block content %}
+			
+		{% endblock content %}
+
+		{{ include('partials/footer.twig') }}
+		{{ include('partials/footer-scripts.twig') }}
+	</body>
+</html>

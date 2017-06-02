@@ -4,5 +4,10 @@
 		"no_msg" : "No message to send",
 		"invalid_input" : "An input is invalid",
 		"success" : "Message sent"
+	},
+	"share_defaults": {
+		"title": "",
+		"description": "",
+		"twitter_desc": ""
 	}
 }

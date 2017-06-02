@@ -3,22 +3,22 @@
 	recordId: rootId,
 	debug: false,
 }) %}
-<!doctype html>
-<html class="no-js" lang="{{ lang_specific }}">
-	<head>
-		{{ include('partials/head.twig') }}
 
-		{{ include('partials/share-metas.twig', {title: page.title_lng ~ ' | ' ~ settings.site_name}) }}
+{% extends "layouts/default.twig" %}
 
-		<title>{{ page.title_lng }} | {{ settings.site_name }}</title>
-	</head>
-	<body class="">
-		{{ include('menu/head-menu.twig') }}
-	
-		{{ include('blocks/content-block.twig') }}
-		
-		{{ include('partials/footer.twig') }}
+{% block head %}
+	{% set defaultShare = {
+		title: page.og_title_lng|default(page.title_lng ~ ' | ' ~ settings.site_name),
+		description: page.og_description_lng,
+		url: fs_link({}),
+		image: fs_src(page.og_image, 1200) ? fs_src(page.og_image, 1200) : null,
+	} %}
 
-		{{ include('partials/footer-scripts.twig') }}
-	</body>
-</html>
+	{{ include('partials/share-metas.twig', defaultShare) }}
+
+	<title>{{ page.title_lng }} | {{ settings.site_name }}</title>
+{% endblock head %}
+
+{% block content %}
+	{{ include('blocks/content-block.twig') }}
+{% endblock content %}
