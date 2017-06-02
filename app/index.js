@@ -98,10 +98,15 @@ this.log(chalk.magenta(
 				},
 				{
 					name: '2.x',
-					value: 'latest',
+					value: '^2.1',
+					checked: true
+				},
+				{
+					name: '3+',
+					value: '^3.2.1',
 					checked: true
 				}],
-				default : 'latest'
+				default : '^3.2.1'
 			},
 			{
 				name: 'isFreestone',
