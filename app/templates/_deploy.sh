@@ -29,6 +29,9 @@ rsync -avzL --progress --no-p --groupmap=*:webmasters ./c/<%= props.projectNames
 
 rsync -avzLR --progress --no-p --groupmap=*:webmasters --exclude-from=.rsync.exclude ./c/<%= props.projectNamespace %> ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/
 
+ssh ubuntu@enclos.ca mkdir -p /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/admin
+rsync -avzL --progress --no-p --groupmap=*:webmasters admin/dist/. enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/admin
+
 setPermissions
 
 cd c/<%= props.projectNamespace %>
