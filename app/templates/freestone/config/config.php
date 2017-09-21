@@ -43,6 +43,7 @@ VEnv::addEnv('prod', ['.com'], [
 		'noCacheVars' => false,
 	],
 	'isDev' => false,
+	'forceWww' => true,
 ]);
 
 // assets version to prevent cache
