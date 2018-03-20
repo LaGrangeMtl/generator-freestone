@@ -4,8 +4,6 @@
 @import "website/utils/_utils";
 @import "website/utils/_easing";
 @import "website/base/_fontfaces";
-@import "../assets/fontello/css/allegra-codes";
-@import "../node_modules/selectric/src/selectric.scss";
 
 @import "website/base/_variables";
 
@@ -16,29 +14,12 @@
 @import "common/bootstrap/_reboot";
 @import "common/bootstrap/mixins/_breakpoints";
 @import "common/bootstrap/utilities/_visibility";
-@import "common/magnific-popup/main";
 
 @import "website/base/_texts";
 @import "website/base/_buttons";
 @import "website/base/_forms";
 
 @import "website/components/_menu";
-@import "website/components/_hero";
-@import "website/components/_btn-block";
-@import "website/components/_cards";
-@import "website/components/_coupon-module";
-@import "website/components/_title-banner";
-@import "website/components/_product-box";
-@import "website/components/_product-variant";
-@import "website/components/_open-collapse";
-@import "website/components/_expendable";
-@import "website/components/_product-slider";
-@import "website/components/_four-columns";
-@import "website/components/_text-block";
-@import "website/components/_two-columns";
 
-@import "website/layout/_slick";
-@import "website/layout/_slick-theme";
 @import "website/layout/_default";
-@import "website/layout/_popin";
 @import "website/layout/_footer";
