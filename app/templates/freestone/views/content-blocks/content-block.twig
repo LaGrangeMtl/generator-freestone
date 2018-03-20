@@ -7,19 +7,27 @@
 			table: 'content_block_type',
 			alias: 'type'
 		},
+		{
+			table: 'general_color',
+			alias: 'contentBlock_background_color',
+			link: 'content_block.background_color'
+		},
+		{
+			table: 'include',
+			alias: 'include_module'
+		},
 	],
 	order: ['content_block.`order` ASC'],
-	parentLink: 'root',
+	parentLink: {
+		table: parentTable,
+		recordId: parentId ? parentId : rootId,
+	},
 	where: [ contentBlockTypes ? "`type`.code IN (" ~ contentBlockTypes ~ ")" : "1" ],
 	debug: false
 }) %}
 
 {% for contentBlock in contentBlocks %}
-	{% if contentBlock.type.code != 'include' %}
-		{{ include('blocks/content-blocks/' ~ contentBlock.type.code ~ '.twig') }}
-	{% else %}
-		{{ include('blocks/content-blocks/includes/' ~ contentBlock.include ~ '.twig') }}
-	{% endif %}
+	{{ include('content-blocks/types/' ~ contentBlock.type.code ~ '.twig') }}
 {% endfor %}
 
 

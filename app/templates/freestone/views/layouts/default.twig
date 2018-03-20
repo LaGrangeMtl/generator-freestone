@@ -8,13 +8,15 @@
 		{% endblock head %}
 	</head>
 	<body class="{{ bodyClass }}">
-		{{ include('menu/head-menu.twig') }}
-
-		{% block content %}
-			
-		{% endblock content %}
-
-		{{ include('partials/footer.twig') }}
-		{{ include('partials/footer-scripts.twig') }}
+		<main>
+			{{ include('menu/head-menu.twig') }}
+	
+			{% block content %}
+				
+			{% endblock content %}
+	
+			{{ include('partials/footer.twig') }}
+			{{ include('partials/footer-scripts.twig') }}
+		</main>
 	</body>
 </html>

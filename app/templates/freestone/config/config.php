@@ -61,6 +61,8 @@ VEnv::$fieldBasedTplNames = ['zva_admin_page'=>'template', 'page'=>'template'];
 VEnv::$salt = '<%= props.salt %>';
 VEnv::$secret = '<%= props.secret %>';
 
+VEnv::$api['google']['clientId'] = 'key.apps.googleusercontent.com';
+
 VEnv::$cacheConfig = [
 	'life' => 86000,
 	'noCacheVars' => false,
@@ -73,6 +75,7 @@ class ClientSettings extends AbstractClientSettings {
 		'site_name' => '<%= props.projectName %>',
 		'fb_appid' => 'xxx',
 		'urchin' => 'UA-xxx',
+		'contentblocksLocation' => 'content-blocks/types',
 	);
 	
 	protected static function initValues(){

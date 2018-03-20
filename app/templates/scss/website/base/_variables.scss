@@ -1,9 +1,26 @@
 
 // Website variables;
-$screen-xl-min: 1500px;
-
 $grid-gutter-width: 30px;
 
+// Grid breakpoints
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+  xl: 1500px
+);
+
+// Grid containers
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+  sm: (720px + $grid-gutter-width),
+  md: (940px + $grid-gutter-width),
+  lg: (1140px + $grid-gutter-width),
+  xl: (1400px + $grid-gutter-width)
+);
 
 //===================================================================
 // Colors
@@ -13,36 +30,25 @@ $grid-gutter-width: 30px;
 $black: #000;
 $white: #fff;
 
-$gray96: #f5f5f2;
-$gray93: #e5ebeb;
-$gray56: #728b9d;
-$gray40: #5b6067;
-$gray51: #587f96;
-$gray25: #373d45;
-$gray20: #303030;
-$gray14: #202328;
+$gray40: #666666;
 
+$color-text-primary: $white;
+$color-text-secondary: $black;
 
-$color-text-primary: $gray25;
-$color-text-secondary: $white;
+$color-accent-primary: $black;
+$color-accent-primary_hover: lighten($black, 10%);
+$color-accent-secondary: $white;
+$color-accent-secondary_hover: lighten($white, 10%);
 
-$color-accent-primary: $gray25;
-$color-accent-primary_hover: $gray40;
-$color-accent-secondary: $gray56;
-$color-accent-secondary_hover: $gray51;
-
-$color-background-main: $gray96;
-$color-background-light: $gray93;
-$color-background-dark: $gray20;
-
+$color-background-main: $white;
 
 
 //===================================================================
 // Fonts
 //===================================================================
 
-$font-family-title: "Comic Sans", Helvetica, Arial, sans-serif;
-$font-family-text: "Comic Sans", Helvetica, Arial, sans-serif;
+$font-family-title: "comic sans", Arial, Helvetica, sans-serif;
+$font-family-text: Arial, Helvetica, sans-serif;
 
 $font-weight-thin: 200;
 $font-weight-light: 300;
@@ -53,46 +59,57 @@ $font-weight-bold: 700;
 $font-weight-extrabold: 800;
 $font-weight-black: 900;
 
-$font-size-title1-lg: fs(50px);
-$font-size-title1-md: fs(50px * 0.8);
-$font-size-title1-sm: fs(50px * 0.8);
-$font-size-title1-xs: fs(50px * 0.8);
+$font-size-title1-xl: fs(40px);
+$font-size-title1-lg: fs(40px * 0.80);
+$font-size-title1-md: fs(40px * 0.8);
+$font-size-title1-sm: fs(40px * 0.8);
+$font-size-title1-xs: fs(40px * 0.8);
 
-$font-size-title2-lg: fs(40px);
-$font-size-title2-md: fs(40px * 0.8);
-$font-size-title2-sm: fs(40px * 0.8);
-$font-size-title2-xs: fs(40px * 0.8);
+$font-size-title2-xl: fs(30px);
+$font-size-title2-lg: fs(30px);
+$font-size-title2-md: fs(30px);
+$font-size-title2-sm: fs(30px * 0.9);
+$font-size-title2-xs: fs(30px * 0.9);
 
+$font-size-title3-xl: fs(24px);
 $font-size-title3-lg: fs(24px);
 $font-size-title3-md: fs(24px * 0.8);
 $font-size-title3-sm: fs(24px * 0.8);
 $font-size-title3-xs: fs(24px * 0.8);
 
-$font-size-title4-lg: fs(18px);
-$font-size-title4-md: fs(18px * 0.8);
-$font-size-title4-sm: fs(18px * 0.8);
-$font-size-title4-xs: fs(18px * 0.8);
+$font-size-title4-xl: fs(20px);
+$font-size-title4-lg: fs(20px);
+$font-size-title4-md: fs(20px * 0.8);
+$font-size-title4-sm: fs(20px * 0.8);
+$font-size-title4-xs: fs(20px * 0.8);
 
+$font-size-button-xl: fs(16px);
+$font-size-button-lg: fs(16px);
+$font-size-button-md: fs(16px);
+$font-size-button-sm: fs(16px);
+$font-size-button-xs: fs(16px);
 
+$font-size-text-xl: fs(16px);
 $font-size-text-lg: fs(16px);
 $font-size-text-md: fs(16px);
 $font-size-text-sm: fs(16px);
 $font-size-text-xs: fs(16px);
 
-$font-size-text-small-lg: fs(14px);
-$font-size-text-small-md: fs(14px);
-$font-size-text-small-sm: fs(14px);
-$font-size-text-small-xs: fs(14px);
+/* <small> tag font size */
+$font-size-small-xl: fs(12px);
+$font-size-small-lg: fs(12px);
+$font-size-small-md: fs(12px);
+$font-size-small-sm: fs(12px);
+$font-size-small-xs: fs(12px);
 
 //===================================================================
 // Forms
 //===================================================================
 
-
-$input-field-height: 50px;
-$input-field-border-color: #969696;
-$input-field-padding: 15px;
-$input-field-font-size: fs(14px);
-
-$input-checkbox-font-size: fs(11px);
-$input-checkbox-check-color: #fff;
+$color-input: $color-text-primary !default;
+$color-input-accent: $color-accent-primary !default;
+$color-input-border: $color-text-primary !default;
+$color-input-background: $white !default;
+$color-input-error: red !default;
+$color-input-error-border: red !default;
+$color-input-placeholder: $color-text-primary !default;

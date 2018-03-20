@@ -1,0 +1,12 @@
+%base_button {
+	cursor: pointer;
+	
+	outline: none;
+	border: none;
+	
+	position: relative;
+}
+
+[class^=button] {
+	@extend %base_button;
+}

@@ -1,155 +1,190 @@
-@mixin title($extend: false) {
-	@if $extend == true {
-		@extend %title;
-	} @else {
-		font-family: $font-family-title;
-		font-weight: $font-weight-medium;
-		line-height: 1;
-		margin: 0 0 0.5em;
-	}
-}
-
 %title {
-	@include title(false);
+	font-family: $font-family-title;
+	font-weight: $font-weight-medium;
+	line-height: 1.25em;
+	margin: 0 0 0.5em 0;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 %title1 {
-	@include title();
-
-	font-size: $font-size-title1-lg;
-	font-weight: $font-weight-normal;
-
-	strong {
-		color: $color-accent-primary;
-		font-weight: inherit;
-	}
-
+	@extend %title;
+	font-size: $font-size-title1-xl;
+	
 	@include responsive-fontsizes((
-		$screen-md-max: $font-size-title1-md,
-		$screen-sm-max: $font-size-title1-sm,
-		$screen-xs-max: $font-size-title1-xs,
+		map-get($grid-breakpoints, lg): $font-size-title1-lg,
+		map-get($grid-breakpoints, md): $font-size-title1-md,
+		map-get($grid-breakpoints, sm): $font-size-title1-sm,
+		map-get($grid-breakpoints, xs): $font-size-title1-xs,
 	));
 }
 
 %title2 {
-	@include title();
+	@extend %title;
+	font-size: $font-size-title2-xl;
 
-	font-size: $font-size-title2-lg;
-	font-weight: $font-weight-normal;
-	
 	@include responsive-fontsizes((
-		$screen-md-max: $font-size-title2-md,
-		$screen-sm-max: $font-size-title2-sm,
-		$screen-xs-max: $font-size-title2-xs,
+		map-get($grid-breakpoints, lg): $font-size-title2-lg,
+		map-get($grid-breakpoints, md): $font-size-title2-md,
+		map-get($grid-breakpoints, sm): $font-size-title2-sm,
+		map-get($grid-breakpoints, xs): $font-size-title2-xs,
 	));
 }
 
 %title3 {
-	@include title();
+	@extend %title;
+	font-size: $font-size-title3-xl;
+	line-height: (30 / 18);
 
-	letter-spacing: 0.05em;
-
-	font-size: $font-size-title3-lg;
 	@include responsive-fontsizes((
-		$screen-md-max: $font-size-title3-md,
-		$screen-sm-max: $font-size-title3-sm,
-		$screen-xs-max: $font-size-title3-xs,
+		map-get($grid-breakpoints, lg): $font-size-title3-lg,
+		map-get($grid-breakpoints, md): $font-size-title3-md,
+		map-get($grid-breakpoints, sm): $font-size-title3-sm,
+		map-get($grid-breakpoints, xs): $font-size-title3-xs,
 	));
 }
-
 
 %title4 {
-	@include title();
+	@extend %title;
+	font-size: $font-size-title4-xl;
+	line-height: (30 / 16);
 
-	text-transform: none;
-	font-size: $font-size-title4-lg;
 	@include responsive-fontsizes((
-		$screen-md-max: $font-size-title4-md,
-		$screen-sm-max: $font-size-title4-sm,
-		$screen-xs-max: $font-size-title4-xs,
+		map-get($grid-breakpoints, lg): $font-size-title4-lg,
+		map-get($grid-breakpoints, md): $font-size-title4-md,
+		map-get($grid-breakpoints, sm): $font-size-title4-sm,
+		map-get($grid-breakpoints, xs): $font-size-title4-xs,
 	));
-}
-
-@mixin text($extend: false) {
-	@if $extend == true {
-		@extend %text;
-	} @else {
-		font-family: $font-family-text;
-		font-size: $font-size-text-lg;
-		font-weight: $font-weight-normal;
-
-		@include responsive-fontsizes((
-			$screen-md-max: $font-size-text-md,
-			$screen-sm-max: $font-size-text-sm,
-			$screen-xs-max: $font-size-text-xs,
-		));
-	}
 }
 
 %text {
-	@include text();
+	font-family: $font-family-text;
+	font-weight: $font-weight-normal;
+	line-height: (20/16);
+
+	font-size: $font-size-text-xl;
+
+	@include responsive-fontsizes((
+		map-get($grid-breakpoints, lg): $font-size-text-lg,
+		map-get($grid-breakpoints, md): $font-size-text-md,
+		map-get($grid-breakpoints, sm): $font-size-text-sm,
+		map-get($grid-breakpoints, xs): $font-size-text-xs,
+	));
 }
 
+%text-smallTag {
+	font-family: $font-family-text;
+	font-weight: $font-weight-normal;
+	line-height: (16/12);
 
-@mixin button-text($extend: false) {
-	@if $extend == true {
-		@extend %button_text;
-	} @else {
-		font-size: fs(14px);
-		line-height: fs(14px);
-		font-weight: $font-weight-normal;
-		font-style: italic;
-	}
+	font-size: $font-size-small-xl;
+
+	@include responsive-fontsizes((
+		map-get($grid-breakpoints, lg): $font-size-small-lg,
+		map-get($grid-breakpoints, md): $font-size-small-md,
+		map-get($grid-breakpoints, sm): $font-size-small-sm,
+		map-get($grid-breakpoints, xs): $font-size-small-xs,
+	));
 }
 
-%button_text {
-	@include button-text();
+%text_button {
+	font-family: $font-family-title;
+	font-weight: $font-weight-bold;
+	font-size: $font-size-button-xl;
+	text-transform: uppercase;	
+	line-height: 1;
+	color: $color-text-primary;
+	letter-spacing: letter-spacing(100);
+
+	@include responsive-fontsizes((
+		map-get($grid-breakpoints, lg): $font-size-button-lg,
+		map-get($grid-breakpoints, md): $font-size-button-md,
+		map-get($grid-breakpoints, sm): $font-size-button-sm,
+		map-get($grid-breakpoints, xs): $font-size-button-xs,
+	));
 }
 
 * {
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
-
 
 body {
 	@extend %text;
 	line-height: 1.4;
-	color: $color-text-primary;
+	color: $color-text-tertiary;
 }
 
 h1 {
 	@extend %title1;
+	
+	section &, article & {
+		@extend %title1;
+		
+		section &, article & {
+			@extend %title2;
+
+			section &, article & {
+				@extend %title3;
+			}
+		}
+    }
 }
 
 h2 {
 	@extend %title2;
+	
+	section &, article & {
+		@extend %title2;
+		
+		section &, article & {
+			@extend %title3;
+
+			section &, article & {
+				@extend %title4;
+			}
+		}
+    }
 }
 
 h3 {
 	@extend %title3;
-}
-
-h4 {
-	@extend %title4;
-}
-
-p {
-	margin-top: 0;
-	margin-bottom: 1em;
-
-	&.small {
-		font-size: fs(14px);
+	
+	section &, article & {
+		@extend %title3;
+		
+		section &, article & {
+			@extend %title4;
+		}
 	}
 }
 
+p {
+	@extend %text;
+	margin-top: 0;
+	margin-bottom: 1em;
+
+	&:last-child() {
+		margin-bottom: 0;
+	}
+}
+
+small {
+	display: block;
+	@extend %text-smallTag;
+}
+
 a:not([class]) {
-	color: $color-accent-primary;
+	color: $color-text-primary;
 	text-decoration: underline;
 	font-style: normal;
-	font-weight: $font-weight-bold;
-
+	transition: color 0.3s;
+	
 	&:hover {
-		color: $color-accent-primary_hover;
+		text-decoration: underline;
+		color: rgba($color-text-primary, 0.75);
 	}
 }
 
@@ -159,4 +194,10 @@ em {
 
 strong {
 	font-weight: $font-weight-bold;
+}
+
+sup {
+	font-size: 1em;
+	font-weight: $font-weight-bold;
+	top: -0.55em;
 }

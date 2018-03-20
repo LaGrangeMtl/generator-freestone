@@ -24,6 +24,14 @@
 	}
 };
 
+@mixin reset-position() {
+	position: relative;
+		top: auto;
+		right: auto;
+		bottom: auto;
+		left: auto;
+}
+
 @function fs($sizeValue) {
 	@return strip-unit($sizeValue) / 16 * 1rem;
 }
