@@ -9,10 +9,7 @@
 		},
 	],
 	order: ['content_block.`order` ASC'],
-	parentLink: {
-		table: parentTable,
-		recordId: parentId ? parentId : rootId,
-	},
+	parentLink: 'root',
 	where: [ contentBlockTypes ? "`type`.code IN (" ~ contentBlockTypes ~ ")" : "1" ],
 	debug: false
 }) %}
