@@ -15,7 +15,11 @@
 }) %}
 
 {% for contentBlock in contentBlocks %}
-	{{ include('content-blocks/types/' ~ contentBlock.type.code ~ '.twig') }}
+	{% if contentBlock.type.code != 'include' %}
+		{{ include('content-blocks/types/' ~ contentBlock.type.code ~ '.twig') }}
+	{% else %}
+		{{ include('content-blocks/includes/' ~ contentBlock.include ~ '.twig') }}
+	{% endif %}
 {% endfor %}
 
 

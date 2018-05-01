@@ -14,10 +14,10 @@
 	font-size: $font-size-title1-xl;
 	
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-title1-lg,
-		map-get($grid-breakpoints, md): $font-size-title1-md,
-		map-get($grid-breakpoints, sm): $font-size-title1-sm,
-		map-get($grid-breakpoints, xs): $font-size-title1-xs,
+		lg: $font-size-title1-lg,
+		md: $font-size-title1-md,
+		sm: $font-size-title1-sm,
+		xs: $font-size-title1-xs,
 	));
 }
 
@@ -26,10 +26,10 @@
 	font-size: $font-size-title2-xl;
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-title2-lg,
-		map-get($grid-breakpoints, md): $font-size-title2-md,
-		map-get($grid-breakpoints, sm): $font-size-title2-sm,
-		map-get($grid-breakpoints, xs): $font-size-title2-xs,
+		lg: $font-size-title2-lg,
+		md: $font-size-title2-md,
+		sm: $font-size-title2-sm,
+		xs: $font-size-title2-xs,
 	));
 }
 
@@ -39,10 +39,10 @@
 	line-height: (30 / 18);
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-title3-lg,
-		map-get($grid-breakpoints, md): $font-size-title3-md,
-		map-get($grid-breakpoints, sm): $font-size-title3-sm,
-		map-get($grid-breakpoints, xs): $font-size-title3-xs,
+		lg: $font-size-title3-lg,
+		md: $font-size-title3-md,
+		sm: $font-size-title3-sm,
+		xs: $font-size-title3-xs,
 	));
 }
 
@@ -52,10 +52,10 @@
 	line-height: (30 / 16);
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-title4-lg,
-		map-get($grid-breakpoints, md): $font-size-title4-md,
-		map-get($grid-breakpoints, sm): $font-size-title4-sm,
-		map-get($grid-breakpoints, xs): $font-size-title4-xs,
+		lg: $font-size-title4-lg,
+		md: $font-size-title4-md,
+		sm: $font-size-title4-sm,
+		xs: $font-size-title4-xs,
 	));
 }
 
@@ -67,10 +67,10 @@
 	font-size: $font-size-text-xl;
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-text-lg,
-		map-get($grid-breakpoints, md): $font-size-text-md,
-		map-get($grid-breakpoints, sm): $font-size-text-sm,
-		map-get($grid-breakpoints, xs): $font-size-text-xs,
+		lg: $font-size-text-lg,
+		md: $font-size-text-md,
+		sm: $font-size-text-sm,
+		xs: $font-size-text-xs,
 	));
 }
 
@@ -82,10 +82,10 @@
 	font-size: $font-size-small-xl;
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-small-lg,
-		map-get($grid-breakpoints, md): $font-size-small-md,
-		map-get($grid-breakpoints, sm): $font-size-small-sm,
-		map-get($grid-breakpoints, xs): $font-size-small-xs,
+		lg: $font-size-small-lg,
+		md: $font-size-small-md,
+		sm: $font-size-small-sm,
+		xs: $font-size-small-xs,
 	));
 }
 
@@ -99,10 +99,10 @@
 	letter-spacing: letter-spacing(100);
 
 	@include responsive-fontsizes((
-		map-get($grid-breakpoints, lg): $font-size-button-lg,
-		map-get($grid-breakpoints, md): $font-size-button-md,
-		map-get($grid-breakpoints, sm): $font-size-button-sm,
-		map-get($grid-breakpoints, xs): $font-size-button-xs,
+		lg: $font-size-button-lg,
+		md: $font-size-button-md,
+		sm: $font-size-button-sm,
+		xs: $font-size-button-xs,
 	));
 }
 
