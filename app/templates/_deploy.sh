@@ -14,15 +14,14 @@ setPermissions() {
 # create the _cache folder, only once too
 # ssh ubuntu@enclos.ca "sudo mkdir /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache && sudo chmod -R 775 /var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/_cache"
 
-cd ../..
-
-setPermissions
-
-	
 	#prend les fichiers de lang et les imgdb, etc. (doit être actif si le client peut changer les langs)
 	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/admin/thumbnails ./admin/
 	# rsync -avzL --progress ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/lang .
 	# rsync -avzL --progress --exclude 'prc*' ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/c/<%= props.projectNamespace %>/uploads .
+
+cd ../..
+
+setPermissions
 
 rsync -avzL --progress --no-p --groupmap=*:webmasters --exclude-from=.rsync.exclude . ubuntu@enclos.ca:/var/www/<%= props.projectNamespace %>.enclos.ca/public_html/
 

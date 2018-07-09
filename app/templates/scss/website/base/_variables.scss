@@ -22,6 +22,12 @@ $container-max-widths: (
   xl: (1400px + $grid-gutter-width)
 );
 
+// Containers variables
+$container-xl: map-get($container-max-widths, xl);
+$container-lg: map-get($container-max-widths, lg);
+$container-md: map-get($container-max-widths, md);
+$container-sm: map-get($container-max-widths, sm);
+
 //===================================================================
 // Colors
 //===================================================================
