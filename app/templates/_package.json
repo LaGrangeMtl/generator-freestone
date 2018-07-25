@@ -41,13 +41,13 @@
 		"utils-merge": "latest",
 		"vinyl-buffer": "latest",
 		"vinyl-source-stream": "latest",
-		"watchify": "^3.4.0"
+		"watchify": "^3.4.0",
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb-base": "^13.0.0",
+		"eslint-plugin-import": "^2.13.0"
 	},
 	"dependencies": {
 		"console-polyfill": "latest",
-		"eslint": "^4.19.1",
-		"eslint-config-airbnb-base": "^13.0.0",
-		"eslint-plugin-import": "^2.13.0",
 		"fingerprintjs2": "^1.5.1",
 		<% if (props.jsLibs.isGreensock){ %>"gsap": "latest",<% } %>
 		"jquery": "^3.2.1",
