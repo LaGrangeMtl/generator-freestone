@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /admin
 Disallow: /c/<%= props.projectNamespace %>/
-Allow: /c/<%= props.projectNamespace %>/img_db/
-Allow: /c/<%= props.projectNamespace %>/file_db/
+Allow: /c/<%= props.projectNamespace %>/uploads/img/
+Allow: /c/<%= props.projectNamespace %>/uploads/docs/
 Allow: /c/<%= props.projectNamespace %>/img/
