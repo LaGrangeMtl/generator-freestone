@@ -4,7 +4,7 @@
 			Indicates that the post key for this feedback will be 'careers', i.e. $_POST['careers'][...]
 			For this config to be called, you must also have a $_POST['feedback'][] = 'careers' in your request
 		*/
-		'careers' => [
+		'careers' => 
 			(object) [
 				/*
 					If is set, SMTP will be used to send the email, with the given conf.

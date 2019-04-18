@@ -131,8 +131,8 @@ function compileScss(cssConf, isProd = false){
 function getBundler(cnf, isDev){
 	var bundler = browserify(JSCONF.src + cnf.src, { debug: true })
 					.transform(babelify, {
-						presets: ['es2015'], 
-						plugins: ['transform-object-assign', 'transform-exponentiation-operator'],
+						presets: ['@babel/preset-env'],
+						plugins: ['@babel/plugin-proposal-class-properties'],
 					});
 
 	if(cnf.external) {
