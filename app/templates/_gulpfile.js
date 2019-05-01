@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 
-
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
@@ -11,17 +10,13 @@ var sourcemaps = require('gulp-sourcemaps');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 
-var bowerResolve = require('bower-resolve');
 var nodeResolve = require('resolve');
 
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
 var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 var colors = require('colors');
-
-var cssmin = require('gulp-cssmin');
 
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
@@ -29,11 +24,8 @@ var livereload = require('gulp-livereload');
 
 var JSCONF = (function(){
 
-	//les libs définies dans package.json et bower.json -> dependencies seront toutes externes. On peut aussi en ajouter ici au besoin.
-	var external = getAllExternalPackageIds([
-		':gsap',
-		':Promise',
-	]);
+	//les libs définies dans package.json -> dependencies seront toutes externes. On peut aussi en ajouter ici au besoin.
+	var external = getAllExternalPackageIds([]);
 	//deépendances qui ne sont addées qu'en dev
 	var devTools = getDependenciesPaths([
 		':source-map-support',
@@ -56,17 +48,11 @@ var JSCONF = (function(){
 	};
 }());
 
-var CSSCONF = [{
+var CSSCONF = {
 	src: 'scss/',
 	dest: 'css',
 	mainFile: 'main.scss',
-}];
-
-
-gulp.task('libcopy', function(){
-	return gulp.src('bower_components/bootstrap-sass/assets/stylesheets/bootstrap/**/*.scss')
-	.pipe(gulp.dest('./scss/common/bootstrap'));
-});
+};
 
 // Without watchify
 gulp.task('browserify', function () {
@@ -79,14 +65,13 @@ gulp.task('browserify:vendor', function () {
 // Without sourcemaps
 gulp.task('browserify:production', function () {
 	bundleJs(getBundler(JSCONF.app, false));
-	CSSCONF.forEach(cssConf => compileScss(cssConf, true));
 	return bundleJs(getBundler(JSCONF.vendor, false));
 });
 
 gulp.task('scss', compileScss);
 
 gulp.task('watch', function () {
-	livereload.listen({ start: true });
+	livereload.listen();
 
 	[JSCONF.app].map(function(jsCnf){
 		var config = getBundler(jsCnf, true);
@@ -97,11 +82,7 @@ gulp.task('watch', function () {
 			bundleJs(config);
 		});
 	});
-
-	CSSCONF.forEach(function(cssConf) {
-		gulp.watch(cssConf.src + '**/*.scss').on('change', function() { compileScss(cssConf) });
-		compileScss(cssConf);
-	});
+	gulp.watch(CSSCONF.src + '**/*.scss').on('change', compileScss);
 
 });
 
@@ -113,27 +94,22 @@ gulp.task('debug', function(){
 
 //***************************************************
 
-function compileScss(cssConf, isProd = false){
-	return gulp.src(cssConf.src + cssConf.mainFile)
-		.pipe(gulpif(!isProd, sourcemaps.init()))
+function compileScss(){
+	return gulp.src(CSSCONF.src + CSSCONF.mainFile)
+		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
-    		browsers: ['last 2 version', 'ie 9', 'ie 10', 'ie 11']
+			browsers: ['last 2 version', 'ie 9', 'ie 10', 'ie 11']
 		}))
-		.pipe(gulpif(!isProd, sourcemaps.write()))
-		.pipe(gulpif(isProd, cssmin()))
-		.pipe(gulp.dest(cssConf.dest).on('end',function(){
-			gutil.log(cssConf.src + ' Sass compiled.');
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest(CSSCONF.dest).on('end',function(){
+			gutil.log('Sass compiled.');
 		}))
-		.pipe(gulpif(livereload.server, livereload()));
+		.pipe(livereload());
 }
 
 function getBundler(cnf, isDev){
-	var bundler = browserify(JSCONF.src + cnf.src, { debug: true })
-					.transform(babelify, {
-						presets: ['@babel/preset-env'],
-						plugins: ['@babel/plugin-proposal-class-properties'],
-					});
+	var bundler = browserify(JSCONF.src + cnf.src, { debug: true }).transform(babelify, { presets: ["@babel/preset-env"]});
 
 	if(cnf.external) {
 		bundler = cnf.external.reduce(function(b, lib){
@@ -196,17 +172,13 @@ function bundleJs(cnf) {
 }
 
 /**
-resolve le path dependant du type de dependency (package.json ou bower.json)
+resolve le path dependant du type de dependency (package.json)
 */
 function resolveDependency(id){
 	try {
 		return nodeResolve.sync(id);
 	} catch(e){
-		try {
-			return bowerResolve.fastReadSync(id);
-		} catch(e){
-			return false;
-		}
+		return false;
 	}
 }
 
@@ -245,12 +217,12 @@ function getDependenciesPaths(list) {
 };
 
 /**
-	get toutes les dépendances package.json, bower.json + une liste user defined (opt)
+	get toutes les dépendances package.json + une liste user defined (opt)
 */
 function getAllExternalPackageIds(additionnal) {
 	var res = getDependenciesPaths(additionnal || []);
 
-	res = ['package', 'bower'].reduce(function(packages, dependencyOrigin){
+	res = ['package'].reduce(function(packages, dependencyOrigin){
 
 		var dependencies = [];
 		var manifest;
