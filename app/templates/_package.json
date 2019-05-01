@@ -34,8 +34,7 @@
 		"bluebird": "^3.5.4"
 	},
 	"browser": {
-		"ns": "./src/app/NameSpace.js",
-		"Promise": "bluebird"
+		"ns": "./src/app/NameSpace.js"
 	},
 	"keywords": []
 }
