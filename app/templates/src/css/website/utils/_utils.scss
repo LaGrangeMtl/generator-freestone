@@ -1,0 +1,300 @@
+@mixin create-spritesheet($gridSettings, $sprites){
+	$gridW: map-get($gridSettings, width);
+	$gridH: map-get($gridSettings, height);
+	$gridHC: map-get($gridSettings, horizontalCuts);
+	$gridVC: map-get($gridSettings, verticalCuts);
+	$spritesheetPath: map-get($gridSettings, spritesheetPath);
+
+	@for $i from 1 through length($sprites){
+		$sprite: nth($sprites, $i);
+		$name: map-get($sprite, name);
+		$x: map-get($sprite, x);
+		$y: map-get($sprite, y);
+		$w: map-get($sprite, w);
+		$h: map-get($sprite, h);
+
+		.sprite-#{$name} {
+			width: ($gridW / $gridHC) * $w;
+			height: ($gridH / $gridVC) * $h;
+
+			background-image: url($spritesheetPath);
+			background-size: $gridW $gridH;
+			background-position: (($gridW / $gridHC) * $x * -1) (($gridH / $gridVC) * $y * -1);
+		}
+	}
+};
+
+@mixin cover {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: auto;
+	max-width: none;
+	
+	&.height {
+		height: 100%;
+		width: auto;
+	}
+}
+
+@mixin reset-position() {
+	position: relative;
+		top: auto;
+		right: auto;
+		bottom: auto;
+		left: auto;
+}
+
+@function fs($sizeValue) {
+	@return strip-unit($sizeValue) / 16 * 1rem;
+}
+
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+@function letter-spacing($ls){
+	@return ($ls / 1000 * 1em);
+}
+
+@mixin placeholder($color) {
+	::-webkit-input-placeholder { color:$color; }
+	::-moz-placeholder { color:$color; } /* firefox 19+ */
+	:-ms-input-placeholder { color:$color; } /* ie */
+	input:-moz-placeholder { color:$color; }
+}
+
+@mixin smooth-gradient-images(){
+	image-rendering: optimizeSpeed;             /* FUCK SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+
+@mixin responsive-fontsizes($breakpoints){
+    @each $breakpoint, $fz in $breakpoints {
+        @include media-breakpoint-down($breakpoint) {
+            font-size: $fz;
+        }
+    }
+}
+
+@mixin hover($class: null){
+	@if($class != null) {
+		.no-touch &:hover, .no-touch &:focus, &.#{$class} {
+			@content;
+		}
+	}
+	@else {
+		.no-touch &:hover, .no-touch &:focus {
+			@content;
+		}
+	}
+}
+
+@mixin set-bootstrap-gutters($gutter){
+	$i: 1;
+	$list: ".container, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+
+	@for $i from (1 + 1) through $grid-columns {
+		$list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+	}
+
+	#{$list} {
+		padding-left:  ($gutter / 2);
+		padding-right: ($gutter / 2);
+	}
+
+	.row {
+		margin-left: -($gutter / 2);
+		margin-right: -($gutter / 2);
+	}
+}
+
+@mixin vendor($property, $value){
+	$vendors:(o, webkit, moz, ms);
+
+	@for $i from 1 through length($vendors) {
+		-#{nth($vendors, $i)}-#{$property}: $value;
+	}
+
+	#{$property}: $value;
+}
+
+@mixin transition($what, $howLong, $ease:ease, $delay:0s) {
+	@include vendor(transition, #{$what} #{$howLong} #{$ease} #{$delay});
+}
+
+@mixin multiple-transitions($transitions){
+	$transitionString: '';
+
+	@for $i from 1 through length($transitions) {
+		$thisTransition: nth($transitions, $i);
+
+		@each $what, $howLong, $ease, $delay in $thisTransition {
+			$transitionString: #{$transitionString} #{$what} #{$howLong} #{$ease} #{$delay};
+		}
+
+		@if $i < length($transitions){
+			$transitionString: $transitionString+',';
+		}
+	}
+
+	@include vendor(transition, $transitionString);
+}
+
+@mixin circle($w, $color) {
+	width: $w;
+	height: $w;
+	border-radius: 100%;
+	background-color: $color;
+}
+
+@mixin min-dppx($dppx) {
+	@media screen and
+			(-webkit-min-device-pixel-ratio: $dppx),
+	    	(min--moz-device-pixel-ratio: $dppx),
+			(min-resolution: #{$dppx}dppx),
+			(min-resolution: ($dppx * 96dpi)) {
+
+		@content;
+	}
+}
+
+@mixin combined-retina-query($dppx, $width) {
+	@media screen and
+			(min-width: $width),
+			(-webkit-min-device-pixel-ratio: $dppx),
+	    	(min--moz-device-pixel-ratio: $dppx),
+			(min-resolution: #{$dppx}dppx),
+			(min-resolution: ($dppx * 96dpi)) {
+
+		@content;
+	}
+}
+
+@mixin retina-bg($image, $image-format, $settings) {
+	@for $i from 1 through length($settings) {
+		$thisSetting: nth($settings, $i);
+
+		$dppx: map-get($thisSetting, dppx);
+		$min-width: map-get($thisSetting, min-width);
+		$width: map-get($thisSetting, width);
+		$height: map-get($thisSetting, height);
+
+		background-size: cover;
+		background: url('#{$s3base}/img/#{$image}@#{$dppx}x.#{$image-format}');
+
+		@if $dppx != null and $min-width != null {
+			@include combined-retina-query($dppx, $min-width) {
+				width: $width;
+				height: $height;
+			}
+		}
+		@else if $dppx != null {
+			@include min-dppx($dppx) {
+				width: $width;
+				height: $height;
+			}
+		}
+		@else if $min-width != null {
+			@include at-least($min-width) {
+				width: $width;
+				height: $height;
+			}
+		}
+	}
+}
+
+@mixin triangle($settings) {
+	$width: map-get($settings, width);
+	$color: map-get($settings, color);
+	$not-equi: map-get($settings, not-equi);
+
+	content: ' ';
+	display: block;
+	width:0;
+	height:0;
+
+	@if $not-equi {
+		$sides: map-get($settings, side);
+		$height: map-get($settings, height);
+
+		$side1: nth($sides, 1);
+		$side2: nth($sides, 2);
+
+		@if $side1 == 'left' {
+			border-right: $width solid $color;
+
+			@if $side2 == 'bottom' {
+				border-top: $height solid transparent;
+			}
+			@else {
+				border-bottom: $height solid transparent;
+			}
+		}
+		@else if $side1 == 'right' {
+			border-left: $width solid $color;
+
+			@if $side2 == 'bottom' {
+				border-top: $height solid transparent;
+			}
+			@else {
+				border-bottom: $height solid transparent;
+			}
+		}
+		@else if $side1 == 'top' {
+			border-bottom: $width solid $color;
+
+			@if $side2 == 'left' {
+				border-right: $height solid transparent;
+			}
+			@else {
+				border-left: $height solid transparent;
+			}
+		}
+		@else {
+			border-top: $width solid $color;
+
+			@if $side2 == 'left' {
+				border-right: $height solid transparent;
+			}
+			@else {
+				border-left: $height solid transparent;
+			}
+		}
+	}
+	@else {
+		$side: map-get($settings, side);
+
+		@if $side == 'left' or $side == 'right' {
+			border-top: $width solid transparent;
+			border-bottom: $width solid transparent;
+		}
+		@else {
+			border-left: $width solid transparent;
+			border-right: $width solid transparent;
+		}
+
+		@if $side == 'left' {
+			border-right: $width solid $color;
+		}
+		@else if $side == 'right' {
+			border-left: $width solid $color;
+		}
+		@else if $side == 'top' {
+			border-bottom: $width solid $color;
+		}
+		@else if $side == 'bottom' {
+			border-top: $width solid $color;
+		}
+	}
+}

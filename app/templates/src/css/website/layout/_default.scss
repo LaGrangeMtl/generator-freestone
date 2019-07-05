@@ -1,0 +1,41 @@
+html {
+	font-size: 100%;
+	background-size: 100% auto;
+}
+
+body {
+	position: relative;
+	background: transparent;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+	
+	&.opened {
+		overflow: hidden;
+	}
+}
+
+main {
+	position: relative;
+	padding: 1px 0;
+	overflow: hidden;
+}
+
+.container-fluid {
+	width: calc(100% - 100px);
+}
+
+img {
+	max-width: 100%;
+}
+
+*, ::before, ::after {
+    -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+	text-decoration: none;
+}

@@ -1,0 +1,16 @@
+{
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "gitolite@xserve.local:freestone.git"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/mgvez/freestone-frontend.git"
+		}
+	],
+	"require": {
+		"la-grange/freestone-backend": "dev-master",
+		"la-grange/freestone-frontend": "dev-master"
+	}
+}

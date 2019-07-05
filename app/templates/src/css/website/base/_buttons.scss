@@ -1,0 +1,63 @@
+%base_button {
+	display: inline-block;
+	cursor: pointer;
+	
+	outline: none;
+	border: none;
+	
+	position: relative;
+
+	min-width: 255px;
+	text-align: center;
+	padding: 18px 24px;
+	margin: 10px;
+	line-height: 1;
+
+	font-weight: $font-weight-bold;
+	letter-spacing: 3px;
+	color: $color-text-primary;
+	text-transform: uppercase;
+	background-color: $black;
+	transition: background-color 0.3s ease;
+	
+	font-size: $font-size-button-xl;
+	@include responsive-fontsizes((
+		lg: $font-size-button-lg,
+		md: $font-size-button-md,
+		sm: $font-size-button-sm,
+		xs: $font-size-button-xs,
+	));
+
+	&:link {
+		color: $color-text-primary;
+		text-decoration: none;
+	}
+
+	&:focus {
+		color: $color-text-primary;
+		text-decoration: none;
+	}
+
+	&:hover {
+		color: $color-text-primary;
+		text-decoration: none;
+	}
+
+	i {
+		margin-right: 6px;
+		font-size: 150%;
+		vertical-align: middle;
+	}
+
+	&:hover {
+		background-color: $black;
+	}
+
+	@include media-breakpoint-down(sm) {
+		padding: 11px 15px;
+	}
+}
+
+[class^=button] {
+	@extend %base_button;
+}

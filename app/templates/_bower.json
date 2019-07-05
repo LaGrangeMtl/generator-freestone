@@ -1,9 +1,0 @@
-{
-  "name": "<%= props.projectName %>",
-  "version": "0.0.1",
-  "dependencies": {
-	"bootstrap": "4.0"
-  },
-  "private": true
-}
-

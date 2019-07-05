@@ -1,4 +1,0 @@
-
-Options -Indexes
-
-# IMPORTANT - do not put client-specific rewrite rules here as it will prevent freestone's root rules from being executed.

@@ -1,0 +1,239 @@
+.success-message {
+	display: none;
+	margin-bottom: 20px;
+}
+
+.error-message,
+.message {
+	font-size: fs(12px);
+	margin-bottom: 10px;
+	color: $color-input-error;
+	line-height: 1.2;
+}
+
+.message {
+	color: $color-accent-primary;
+}
+
+form {
+	margin: 30px 0;
+
+	.field {
+		position: relative;
+		margin: 0 0 $grid-gutter-width/2 0;
+
+		label {
+			position: absolute;
+			margin: 0;
+			transition: all, 0.3s;
+		}
+
+		&.checkbox {
+			margin-bottom: 30px;
+		}
+
+		textarea,
+		select,
+		input[type=text],
+		input[type=tel],
+		input[type=email],
+		input[type=date],
+		input[type=password],
+		input[type=number] {
+			text-transform: uppercase;
+			font-family: $font-family-text;
+			font-weight: $font-weight-light;
+			color: $color-accent-primary;
+			background: $color-input-background;
+			border: none;
+			padding: $grid-gutter-width/2;
+			font-size: fs(14px);
+
+			display: block;
+			width: 100%;
+			height: 55px;
+			outline: none;
+			border-radius: 0px;
+
+			-webkit-appearance: none;
+
+			& ~ label {
+				cursor: text;
+				pointer-events: none;
+
+				position: absolute;
+					top: 0;
+					left: $grid-gutter-width/2;
+
+				padding: 0;
+
+				width: calc(100% - #{$grid-gutter-width});
+				height: 55px;
+				line-height: 55px;
+
+				color: $color-input-placeholder;
+
+				text-transform: uppercase;
+				font-family: $font-family-text;
+				font-weight: $font-weight-light;
+				color: $color-accent-primary;
+				padding: 0 $grid-gutter-width/2;
+				font-size: fs(14px);
+
+				span {
+					position: relative;
+					font-weight: $font-weight-light;
+					transition: opacity 0.2s $easeInOutCubic 0.1s;
+					opacity: 1;
+				}
+
+				&:after {
+					content: attr(data-placeholder);
+					position: absolute;
+						top: 8px;
+						left: $grid-gutter-width/2;
+
+					font-size: 10px;
+					letter-spacing: 1px;
+					line-height: 8px;
+					color: $black;
+
+					transition: opacity 0.2s $easeInOutCubic, transform 0.2s $easeInOutCubic, color 0.2s;
+
+					opacity: 0;
+					transform: translate(0, 4px);
+				}
+			}
+
+			& ~ label.visible {
+				pointer-events: none;
+
+				span {
+					opacity: 0;
+					transition: opacity 0.1s $easeInOutCubic;
+				}
+
+				&:after {
+					opacity: 1;
+					transform: translate(0, 0);
+					transition: opacity 0.2s $easeInOutCubic 0.1s, transform 0.2s $easeInOutCubic 0.1s;
+				}
+			}
+
+			&:focus ~ label.visible:after {
+				// color: $color-input-accent;
+			}
+
+			&.error {
+				color: $color-input-error;
+				border-color: $color-input-error-border;
+
+				& ~ label {
+					color: $color-input-error;
+				}
+			}
+		}
+
+		select {
+			cursor: pointer;
+		}
+
+		&.select {
+			&:after {
+				content: '';
+				position: absolute;
+					top: 25px;
+					right: $grid-gutter-width/2;
+				width: 0;
+				height: 0;
+				pointer-events: none;
+			}
+		}
+
+		textarea {
+			padding: 10px $grid-gutter-width/2;
+			width: 100%;
+			height: 145px;
+			line-height: 20px;
+			padding-top: $grid-gutter-width/2;
+		}
+
+		input[type=submit] {
+			border-radius: 0px;
+		}
+
+		input[type=date] {
+			&:after {
+				position: absolute;
+					top: 25px;
+					right: $grid-gutter-width/2;
+				background: none;
+				content: '';
+				width: 0;
+				height: 0;
+				pointer-events: none;
+			}
+
+			&::-webkit-inner-spin-button {
+				display: none;
+			}
+
+			&::-webkit-calendar-picker-indicator {
+				opacity: 0;
+			}
+		}
+
+		input[type=checkbox] {
+			//en opacité 0 plutot que display none, sinon validation browser affiche pas
+			position: absolute;
+			opacity: 0;
+
+			& ~ label {
+				cursor: pointer;
+				@include reset-position();
+				display: block;
+				padding-left: 50px;
+
+				&:before {
+					content: ' ';
+					position: absolute;
+						top: 0px;
+						left: 0;
+
+					width: 30px;
+					height: 30px;
+				}
+
+				&:after {
+					display: none;
+					content: 'L';
+					position: absolute;
+						top: -3px;
+						left: 10px;
+					font-size: 20px;
+					color: $color-text-primary;
+					// text-shadow: 0px 0px 2px $color-input;
+
+					transform: rotate(45deg) scale(-1, 1);
+				}
+			}
+
+			&:checked ~ label:after {
+				display: block;
+			}
+		}
+	}
+
+	.submit {
+		text-align: center;
+		margin-top: 20px;
+
+		.button-pill {
+			min-width: 150px;
+		}
+	}
+
+	.required-note {
+		color: $black;
+	}
+}
