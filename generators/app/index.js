@@ -13,10 +13,6 @@ var getSalt = function (len) {
 	return salt;
 }
 
-// this.props.projectNamespace = this._.camelize(this.props.projectName);
-// this.props.salt = getSalt();
-// this.props.secret = getSalt(65);
-
 module.exports = class extends Generator {
 	constructor(args, opts) {
 		super(args, opts);

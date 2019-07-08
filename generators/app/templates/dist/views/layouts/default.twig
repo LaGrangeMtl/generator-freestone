@@ -8,14 +8,21 @@
 		{% endblock head %}
 	</head>
 	<body class="{{ bodyClass }}">
-		<main>
+		<main class="{% block mainclass %}{% endblock mainclass %}" data-barba="wrapper">
 			{{ include('menu/head-menu.twig') }}
+
+			<div class="wiper active" data-wiper>
+				<!-- anything related to page transitions here -->
+			</div>
 	
-			{% block content %}
-				
-			{% endblock content %}
+			<div class="barba-container" data-main data-barba="container">
+				{% block content %}
+					
+				{% endblock content %}
+
+				{{ include('partials/footer.twig') }}
+			</div>
 	
-			{{ include('partials/footer.twig') }}
 			{{ include('partials/footer-scripts.twig') }}
 		</main>
 	</body>
