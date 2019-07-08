@@ -2,8 +2,9 @@
 
 copy_method='ftp'
 
-ftp_hostname=192.168.1.198
-ftp_localdir=./
-ftp_user=''
+ftp_hostname=''
+ftp_username=''
 ftp_password=''
+
+ftp_localdir='../dist'
 ftp_remotedir='/'
