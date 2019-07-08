@@ -1,9 +1,9 @@
 #!/bin/bash
 
-is_ftp='false'
+copy_method='ftp'
 
-ftp_hostname=192.168.1.199
-ftp_localdir=~/ftp-temp
+ftp_hostname=192.168.1.198
+ftp_localdir=./
 ftp_user=''
 ftp_password=''
 ftp_remotedir='/'
