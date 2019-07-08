@@ -10,14 +10,17 @@ require_once($root . '/freestone/autoload.php');
 require_once(__DIR__ . '/vendor/autoload.php');
 
 # Config
-$config = __DIR__.'/config/config.php';
-if (file_exists($config)) {
+require_once(__DIR__.'/config/config.php');
+
+# EnvConfig
+$envConfig = __DIR__.'/config/EnvConfig.php';
+if (file_exists($envConfig)) {
 	/** @noinspection PhpIncludeInspection */
-	require_once($config);
+	require_once($envConfig);
 } else {
-	$config = __DIR__.'/../config/config.php';
+	$envConfig = __DIR__.'/../config/EnvConfig.php';
 	/** @noinspection PhpIncludeInspection */
-	require_once($config);
+	require_once($envConfig);
 }
 
 # VEnv

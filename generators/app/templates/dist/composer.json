@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"la-grange/freestone-backend": "dev-master",
-		"la-grange/freestone-frontend": "dev-master"
-	}
+		"la-grange/freestone-backend": "dev-master"
+	},
+	"minimum-stability": "dev"
 }
