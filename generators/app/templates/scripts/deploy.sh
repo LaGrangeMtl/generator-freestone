@@ -8,6 +8,11 @@ push_config='false'
 
 LOG='\033[0;36m'
 NC='\033[0m'
+BASENAME=`basename "$CURRENT"`
+
+if [ $BASENAME != 'script' ]; then
+  cd scripts
+fi
 
 while getopts 'ipe:c' flag; do
   case "${flag}" in
@@ -27,3 +32,7 @@ if [ $env == 'prod' ]; then
 fi
 
 . ./procedures/copy-${copy_method}.sh
+
+if [ $BASENAME != 'scripts' ]; then
+  cd ..
+fi
