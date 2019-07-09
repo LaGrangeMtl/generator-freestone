@@ -98,7 +98,7 @@ module.exports = class extends Generator {
 				this.destinationPath(path),
 				{
 					props: {
-						projectName: this.props.projectName,
+						projectName: _.kebabCase(this.props.projectName),
 						projectNamespace: _.camelCase(this.props.projectName),
 						projectPhpNamespace: _.startCase(_.camelCase(this.props.projectName)).replace(' ', ''),
 						salt: getSalt(),
