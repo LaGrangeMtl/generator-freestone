@@ -38,7 +38,7 @@ module.exports = class extends Generator {
 	writing() {
 		let tplFiles = [
 			'package.json',
-			'scripts/deploy-enclos.sh',
+			'scripts/deploy.sh',
 			'src/js/NameSpace.js',
 		];
 
@@ -107,5 +107,7 @@ module.exports = class extends Generator {
 				}
 			);
 		});
+
+		this.installDependencies();
 	}
 }

@@ -19,4 +19,11 @@ while getopts 'ipe:c' flag; do
 done
 
 . ./configs/config-${env}.sh
+
+if [ $env == 'prod' ]; then
+  cd ..
+  npm run build
+  cd scripts
+fi
+
 . ./procedures/copy-${copy_method}.sh

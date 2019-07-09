@@ -7,7 +7,8 @@
 		"watch": "sh scripts/watch.sh",
 		"dev": "sh scripts/dev.sh",
 		"build": "sh scripts/build.sh",
-		"deploy": "sh scripts/deploy-enclos.sh"
+		"deploy": "sh scripts/deploy.sh -e dev",
+		"deploy-prod": "sh scripts/deploy.sh -e prod"
 	},
 	"keywords": [],
 	"author": "La Grange",
