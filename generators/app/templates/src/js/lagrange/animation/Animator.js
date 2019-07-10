@@ -2,13 +2,14 @@
 'use strict';
 
 import 'core-js/fn/array/find';
-// import Scrollbar from 'smooth-scrollbar';
 import {
 	scale,
 	rotate,
 	translate,
 	compose,
 	toCSS,
+	fromString,
+	identity,
 } from 'transformation-matrix';
 
 import Ease from './Easings';
@@ -162,6 +163,7 @@ export function Animator() {
 					ease: anim.ease,
 					keyframes,
 					keys: Object.keys(keyframes),
+					initialMatrix: getInitialMatrix(el),
 				});
 			});
 			return c;
@@ -241,14 +243,15 @@ export function Animator() {
 		if (ctx.animation_loop) {
 			cancelAnimationFrame(ctx.animation_loop);
 		}
-		// Setup the new requestAnimationFrame()
+		
 		ctx.animation_loop = requestAnimationFrame(() => {
 			update(ctx);
 		});
 	}
 
-	function matrix(values) {
+	function matrix(initialMatrix, values) {
 		values.transform = toCSS(compose(
+			initialMatrix,
 			translate(values.x || 0, values.y || 0),
 			rotate(values.rotation || 0),
 			scale(values.scaleX || 1, values.scaleY || 1),
@@ -267,14 +270,19 @@ export function Animator() {
 		elements.forEach((el) => {
 			if (el.context !== ctx) return;
 			
-			const values = matrix(transformValues(el, st));
+			const values = matrix(el.initialMatrix, transformValues(el, st));
 			values['will-change'] = 'transform';
 			if (hasChanged(el, values)) {
-				// TweenMax.set(el.node, values);
 				Object.assign(el.node.style, values);
 				el.animator__lastValues = values;
 			}
 		});
+	}
+
+	function getInitialMatrix(elem) {
+		elem.style.transform = '';
+		const transform = window.getComputedStyle(elem).getPropertyValue('transform');
+		return transform !== 'none' ? fromString(transform) : identity();
 	}
 
 	function getEase(animationId) {
@@ -295,6 +303,7 @@ export function Animator() {
 			ease: getEase(animationId),
 			keyframes,
 			keys: Object.keys(keyframes),
+			initialMatrix: getInitialMatrix(elem),
 		});
 
 		return list.concat(getChildren(context, elem, rect, animationId));
