@@ -18,8 +18,8 @@ VEnv::$defaultTable = 'page';
 
 VEnv::$fieldBasedTplNames = ['zva_admin_page'=>'template', 'page'=>'template'];
 
-VEnv::$salt = '';
-VEnv::$secret = '';
+VEnv::$salt = '<%= props.salt %>';
+VEnv::$secret = '<%= props.secret %>';
 
 VEnv::$api['google']['clientId'] = 'key.apps.googleusercontent.com';
 
