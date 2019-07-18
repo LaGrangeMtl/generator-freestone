@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "chalk": "~0.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "mocha": "^6.1.4",
     "yeoman-generator": "^4.0.1"
   },
