@@ -1,5 +1,5 @@
 
-import { Animator } from './lagrange/animation/Animator';
+import { Animator } from '@lagrange/animator';
 import { Animations } from './Animations';
 import Barba from './Barba';
 import context from './lagrange/context';
