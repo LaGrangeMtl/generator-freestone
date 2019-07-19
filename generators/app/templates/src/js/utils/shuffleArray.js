@@ -3,7 +3,6 @@
  * create a new array.
  *
  * @param {Array} array
- * 
  * @return {Array} array
  */
 export const shuffleArray = (array) => {

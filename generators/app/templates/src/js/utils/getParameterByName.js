@@ -7,10 +7,10 @@
  * @return {any} result Can return multiple values (null, '' or the value of the parameter)
  */
 export const getParameterByName = (name, url = window.location.href) => {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
-    const results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	const n = name.replace(/[\[\]]/g, '\\$&'); //eslint-disable-line
+	const regex = new RegExp(`[?&]${n}(=([^&#]*)|&|#|$)`);
+	const results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
