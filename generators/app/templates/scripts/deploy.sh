@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAMESPACE=test #<%= props.projectNamespace %>
+NAMESPACE=<%= props.projectNamespace %>
 install='false'
 pull_images='false'
 env='dev'
