@@ -42,20 +42,14 @@ DirectoryIndex index.php
 
 RewriteRule config\.php - [F,L]
 
-# This adds a trailing slash at the end. This way the browser is truly redirected to the admin directory. Otherwise, the
-# references won't work. It wasn't necessary when the admin directory existed because apache did this by default, but
-# now the front-end is in the vendor folder and the admin directory doesn't exists.
-RewriteCond %{REQUEST_URI} !(/$|\.)
-RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
-
 RewriteRule ^admin/$ vendor/la-grange/freestone-frontend/dist/index.html [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^admin/(.*)$ vendor/la-grange/freestone-frontend/dist/$1 [QSA,L]
 
-RewriteRule ^send-feedback$ /freestone/frontendv2/modules/sendFeedback.php [QSA,L] #v1
-RewriteRule ^feedback$ /freestone/frontendv2/modules/feedback/send.php [QSA,L] #v2
-RewriteRule ^inscription$ /freestone/frontendv2/modules/inscription/index.php [QSA,L]
+RewriteRule ^send-feedback$ modules/sendFeedback.php [QSA,L] #v1
+RewriteRule ^feedback$ modules/feedback/send.php [QSA,L] #v2
+RewriteRule ^inscription$ modules/inscription/index.php [QSA,L]
 
 RewriteRule ^(fs)?api/(.*)$ api.php?/$2 [QSA,L]
 
@@ -64,10 +58,10 @@ RewriteRule ^c/[a-z0-9_\-]+/views/.*$ - [F,L]
 
 # image de banque resizés
 RewriteCond %{QUERY_STRING} !notiny
-RewriteRule ([^/]+)/uploads/(zva_bank_img\.file|img)/(\d+prc/)?(.*)$ c/$1/uploads/$2-tiny/$3/$4 [L]
+RewriteRule ([^/]+)/uploads/(img)/(\d+prc/)?(.*)$ $1/uploads/$2-tiny/$3/$4 [L]
 
 # si 100%, file par defaut
-RewriteRule ([^/]+)/uploads/(zva_bank_img\.file|img)(-tiny)?/100prc/(.*)$ c/$1/uploads/$2$3/$4 [L]
+RewriteRule ([^/]+)/uploads/(img)(-tiny)?/100prc/(.*)$ $1/uploads/$2$3/$4 [L]
 
 # si autre size et existe pas, procedure de resize
 RewriteCond %{REQUEST_URI} !uploads/(zva_bank_img\.file-tiny|img-tiny)

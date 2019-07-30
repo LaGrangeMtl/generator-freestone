@@ -61,9 +61,11 @@ module.exports = class extends Generator {
 				this.templatePath('dist/views'),
 				this.templatePath('dist/.htaccess'),
 				this.templatePath('dist/api.php'),
-				this.templatePath('dist/Hooks.php'),
-				this.templatePath('dist/index.php'),
+				this.templatePath('dist/bootstrap.php'),
 				this.templatePath('dist/composer.json'),
+				this.templatePath('dist/Hooks.php'),
+				this.templatePath('dist/imageBank.php'),
+				this.templatePath('dist/index.php'),
 				this.templatePath('config'),
 			];
 		} else {
