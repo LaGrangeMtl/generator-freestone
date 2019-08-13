@@ -36,3 +36,6 @@ _optimization
 uploads/zva_bank_img.file/[0-9]*prc
 uploads/zva_bank_img.file-tiny
 admin/thumbnails
+
+composer.lock
+package-lock.json
