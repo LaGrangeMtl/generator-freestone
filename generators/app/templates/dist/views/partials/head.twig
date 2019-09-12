@@ -11,6 +11,8 @@
 		<link rel="alternate" hreflang="{{ language.code }}" href="{{ fs_link({l: language.key}) }}" />
 	{% endif %}
 {% endfor %}
+<link rel="alternate" hreflang="{{ lang }}" href="{{ fs_link({l: lang}) }}" />
+
 <script>
 	(function(ns){
 		ns.lang = '{{ lang }}';
