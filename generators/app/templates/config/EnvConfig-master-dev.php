@@ -1,11 +1,11 @@
 <?PHP
 namespace Freestone;
 
-VEnv::addEnv('local', ['.local', '.lol', '.com', '.ca'], [
-	'dbServer' => '192.168.1.199',
-	'dbName' => '<%= props.projectName %>_dev_local',
-	'dbUser' => 'remote',
-	'dbPass' => 'remote',
+VEnv::addEnv('enclos', ['.enclos.ca'], [
+	'dbServer' => 'localhost',
+	'dbName' => '<%= props.projectName %>_master_dev',
+	'dbUser' => '',
+	'dbPass' => '',
 	'cacheConfig' => [
 		'life' => 3600,
 		'noCacheVars' => false,
@@ -15,12 +15,12 @@ VEnv::addEnv('local', ['.local', '.lol', '.com', '.ca'], [
 	'forceWww' => false,
 	'api'=> [
 
-	],
+	]
 ]);
 
 ClientSettings::$settings['gtm_ca'] = '';
 ClientSettings::$settings['gtm_us'] = '';
-ClientSettings::$settings['site_name'] = '<%= props.projectName %>.dev.local.enclos';
+ClientSettings::$settings['site_name'] = '<%= props.projectName %>.master.dev.enclos';
 ClientSettings::$settings['regions']['ca']['tld'] = 'ca';
 ClientSettings::$settings['regions']['ca']['use_region_as_prefix'] = true;
 ClientSettings::$settings['regions']['us']['tld'] = 'ca';

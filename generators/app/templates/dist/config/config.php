@@ -30,7 +30,7 @@ VEnv::$cacheConfig = [
 
 class ClientSettings extends AbstractClientSettings {
 
-	protected static $settings = array(
+	public static $settings = array(
 		'site_name' => 'example',
 		'fb_appid' => 'xxx',
 		'urchin' => 'UA-xxx',
