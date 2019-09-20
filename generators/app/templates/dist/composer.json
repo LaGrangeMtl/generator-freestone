@@ -2,15 +2,25 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "gitolite@xserve.local:freestone.git"
+			"url": "git@ssh.dev.azure.com:v3/LaGrangeMtl/Freestone-Backend/Freestone-Backend"
 		},
 		{
 			"type": "vcs",
 			"url": "https://github.com/mgvez/freestone-frontend.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@bitbucket.org:lagrangeas/doppelganger-front.git"
 		}
 	],
 	"require": {
-		"la-grange/freestone-backend": "dev-master"
+		"la-grange/freestone-backend": "3.1.*",
+		"la-grange/doppelganger-front": "1.0.*",
+		"phpoffice/phpexcel": "1.8.1",
+		"guzzlehttp/guzzle": "~6.0",
+		"ext-json": "*",
+		"ext-simplexml": "*",
+		"ext-zip": "*"
 	},
 	"minimum-stability": "dev"
 }

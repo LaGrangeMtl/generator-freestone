@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /admin
-Disallow: /c/example/
-Allow: /c/example/uploads/img/
-Allow: /c/example/uploads/docs/
-Allow: /c/example/img/
+Allow: /uploads/img/
+Allow: /uploads/docs/
+Allow: /assets/img/
