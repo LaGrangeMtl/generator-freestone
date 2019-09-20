@@ -26,6 +26,7 @@
 		"sass": "^1.22.3"
 	},
 	"dependencies": {
+		"@lagrange/animator": "*",
 		"@lagrange/barba-core": "^2.3.21",
 		"Promise": "^1.0.5",
 		"bluebird": "^3.5.5",
