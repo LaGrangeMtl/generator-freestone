@@ -16,10 +16,12 @@ var getSalt = function (len) {
 module.exports = class extends Generator {
 	constructor(args, opts) {
 		super(args, opts);
+
+		this.option('defaults');
 	}
 
 	async prompting() {
-		this.props = await this.prompt([
+		this.defaults = [
 			{
 				type: "input",
 				name: "projectName",
@@ -32,7 +34,16 @@ module.exports = class extends Generator {
 				message: "Utilise freestone ?",
 				default: true,
 			}
-		]);
+		];
+		
+		if (this.options.defaults) {
+			this.props = this.defaults.reduce((c, prompt) => {
+				c[prompt.name] = prompt.default;
+				return c;
+			}, {});
+		} else {
+			this.props = await this.prompt(this.defaults);
+		}
 	}
 
 	writing() {
