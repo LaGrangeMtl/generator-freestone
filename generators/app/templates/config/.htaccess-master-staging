@@ -1,4 +1,4 @@
-.htaccess-master-dev
+
 AddDefaultCharset UTF-8
 
 <IfModule mod_deflate.c>
