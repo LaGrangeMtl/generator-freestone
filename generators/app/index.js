@@ -82,6 +82,7 @@ module.exports = class extends Generator {
 		} else {
 			tplFiles = [
 				...tplFiles,
+				'config/',
 				'dist/admin/hooks/AbstractHook.php',
 				'dist/config/config.php',
 				'dist/views/partials/head.twig',
