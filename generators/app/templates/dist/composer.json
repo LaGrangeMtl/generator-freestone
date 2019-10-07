@@ -7,15 +7,10 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/mgvez/freestone-frontend.git"
-		},
-		{
-			"type": "vcs",
-			"url": "git@bitbucket.org:lagrangeas/doppelganger-front.git"
 		}
 	],
 	"require": {
 		"la-grange/freestone-backend": "3.2.*",
-		"la-grange/doppelganger-front": "3.2.*",
 		"phpoffice/phpexcel": "1.8.1",
 		"guzzlehttp/guzzle": "~6.0",
 		"ext-json": "*",
