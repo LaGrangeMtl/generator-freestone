@@ -30,5 +30,4 @@ if (file_exists($envConfig)) {
 use Freestone\VEnv;
 VEnv::$clientDir = '';
 VEnv::init(__DIR__.'/');
-VEnv::$isDev = true;
 VEnv::connectDb();
