@@ -3,7 +3,7 @@ namespace Freestone;
 
 VEnv::addEnv('produs', ['.com'], [
 	'dbServer' => 'localhost',
-	'dbName' => 'client_master_prod',
+	'dbName' => '<%= props.projectName %>_master_prod',
 	'dbUser' => '',
 	'dbPass' => '',
 	'cacheConfig' => [

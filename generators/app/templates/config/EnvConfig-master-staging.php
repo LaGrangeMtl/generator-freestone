@@ -3,9 +3,9 @@ namespace Freestone;
 
 VEnv::addEnv('enclos', ['.enclos.ca'], [
 	'dbServer' => 'localhost',
-	'dbName' => 'client_master_staging',
-	'dbUser' => '',
-	'dbPass' => '',
+	'dbName' => '<%= props.projectName %>_master_staging',
+	'dbUser' => '<%= props.projectName %>_master_staging',
+	'dbPass' => '<%= props.dbPassStaging %>',
 	'cacheConfig' => [
 		'life' => 3600,
 		'noCacheVars' => false,
