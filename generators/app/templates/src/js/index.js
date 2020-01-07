@@ -20,4 +20,6 @@ docReady.then(() => {
 	Barba.init([
 		// List container modules here
 	], updateAnimator);
-});
+}).catch(e => {
+	console.error(e);
+});;
