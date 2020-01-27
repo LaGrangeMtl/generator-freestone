@@ -33,6 +33,7 @@ bower_components
 _cache
 _optimization
 
-uploads/zva_bank_img.file/[0-9]*prc
-uploads/zva_bank_img.file-tiny
-admin/thumbnails
+dist/uploads/img/[0-9]*prc
+dist/uploads/img-tiny
+dist/uploads/zva_bank_img.file/[0-9]*prc
+dist/uploads/zva_bank_img.file-tiny
