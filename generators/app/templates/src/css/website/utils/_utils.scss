@@ -15,6 +15,7 @@
 	}
 }
 
+
 @mixin create-spritesheet($gridSettings, $sprites){
 	$gridW: map-get($gridSettings, width);
 	$gridH: map-get($gridSettings, height);
