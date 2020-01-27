@@ -1,4 +1,6 @@
 
+import './utils/polyfills';
+
 import { Animator } from '@lagrange/animator';
 import { Animations } from './Animations';
 import Barba from './Barba';

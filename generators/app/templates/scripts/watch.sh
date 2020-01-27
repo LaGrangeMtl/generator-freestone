@@ -1,5 +1,5 @@
 cd dist
-composer update
+composer install
 cd ..
-parcel watch 'src/(css|js)/index.(scss|js)' -d dist/assets --no-hmr --public-url /assets/ &
+parcel watch 'src/(css|js)/index.(scss|js)' --public-url /assets -d dist/assets --no-hmr &
 livereload dist
