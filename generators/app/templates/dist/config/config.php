@@ -43,3 +43,11 @@ class ClientSettings extends AbstractClientSettings {
 
 }
 
+class Hooks {
+	public static function modifyImageBankItemAttrs($attr) {
+		$attr[] = 'loading="lazy"';
+		return $attr;
+	}
+}
+
+
