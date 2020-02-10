@@ -1,4 +1,6 @@
 
+import './utils/polyfills';
+
 import { Animator } from '@lagrange/animator';
 import { Animations } from './Animations';
 import Barba from './Barba';
@@ -20,4 +22,6 @@ docReady.then(() => {
 	Barba.init([
 		// List container modules here
 	], updateAnimator);
-});
+}).catch(e => {
+	console.error(e);
+});;

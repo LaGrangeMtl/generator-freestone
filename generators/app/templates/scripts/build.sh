@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 npm install
 cd dist
-composer update
+composer install
 cd ..
 rm -rf dist/assets/js
 rm -rf dist/assets/css

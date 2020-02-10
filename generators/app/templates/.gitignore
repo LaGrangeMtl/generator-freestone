@@ -35,8 +35,6 @@ _optimization
 db/sync
 _workdir
 
-uploads/img/[0-9]*prc
-uploads/img-tiny
+dist/uploads/img/[0-9]*prc
+dist/uploads/img-tiny
 
-composer.lock
-package-lock.json
