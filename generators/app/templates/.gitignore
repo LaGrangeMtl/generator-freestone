@@ -32,10 +32,11 @@ bower_components
 /dist/vendor
 _cache
 _optimization
+db/sync
+_workdir
 
-uploads/zva_bank_img.file/[0-9]*prc
-uploads/zva_bank_img.file-tiny
-admin/thumbnails
+uploads/img/[0-9]*prc
+uploads/img-tiny
 
 composer.lock
 package-lock.json
