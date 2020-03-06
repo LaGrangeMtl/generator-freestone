@@ -1,3 +1,7 @@
+AuthType Basic
+AuthName "Private Login"
+AuthUserFile /var/www/<%= props.projectName %>.master.local.enclos.ca/public_html/.htpasswd
+Require valid-user
 
 AddDefaultCharset UTF-8
 
