@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin
-Allow: /uploads/img/
-Allow: /uploads/docs/
-Allow: /assets/img/
