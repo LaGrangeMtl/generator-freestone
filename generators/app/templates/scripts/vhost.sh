@@ -1,7 +1,7 @@
 #!/bin/bash
 
 project=${PWD##*/}
-branch=$(git rev-parse --abbrev-ref HEAD)
+branch=$(git symbolic-ref --short HEAD)
 suggested_site_name="${project,,}.$branch.local.enclos.ca"
 
 if [ -z "$1" ] ; then
