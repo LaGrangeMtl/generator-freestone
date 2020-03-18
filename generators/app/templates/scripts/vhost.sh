@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ..
-
 project=${PWD##*/}
 branch=$(git rev-parse --abbrev-ref HEAD)
 suggested_site_name="${project,,}.$branch.local.enclos.ca"
