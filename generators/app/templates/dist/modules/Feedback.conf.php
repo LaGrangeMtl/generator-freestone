@@ -72,5 +72,11 @@ $feedbacks = [
 		'onSent' => function($formattedValues) {
 			//whatever the fuck you want
 		},
+
+		/*
+		 * Set reCAPTCHA to true if you want to validate the reCAPTCHA before sending the email. You will also need to
+		 * set the 'reCAPTCHA_siteKey' and 'reCAPTCHA_secretKey' keys in ClientSettings.
+		 */
+		'reCAPTCHA' => false,
 	],
 ];

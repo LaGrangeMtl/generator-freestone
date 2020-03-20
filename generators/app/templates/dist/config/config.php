@@ -35,6 +35,8 @@ class ClientSettings extends AbstractClientSettings {
 		'fb_appid' => 'xxx',
 		'urchin' => 'UA-xxx',
 		'contentblocksLocation' => 'content-blocks/types',
+		'reCAPTCHA_siteKey' => '',
+		'reCAPTCHA_secretKey' => '',
 	);
 	
 	protected static function initValues(){
