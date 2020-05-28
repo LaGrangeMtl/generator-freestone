@@ -39,3 +39,7 @@ _workdir
 dist/uploads/img/[0-9]*prc
 dist/uploads/img-tiny
 
+dist/assets/css/index.css
+dist/assets/css/index.css.map
+dist/assets/js/index.js
+dist/assets/js/index.js.map
