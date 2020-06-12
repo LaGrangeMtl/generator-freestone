@@ -91,7 +91,11 @@ echo "$host" | sudo tee /etc/apache2/sites-available/"$site".conf > /dev/null
 
 
 echo Enabling site...
-sudo a2ensite "$site".conf > /dev/null
+if [ -f a2ensite ]
+	sudo a2ensite "$site".conf > /dev/null
+else
+	sudo ln -s 
+fi
 
 
 echo Restarting apache2...

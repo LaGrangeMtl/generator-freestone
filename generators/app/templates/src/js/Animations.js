@@ -1,14 +1,16 @@
 'format es6';
 'use strict';
 
-import {
-	ELEM_BOTTOM, //eslint-disable-line
-	ELEM_TOP, //eslint-disable-line
-	ELEM_CENTER, //eslint-disable-line
-	SCREEN_BOTTOM, //eslint-disable-line
-	SCREEN_TOP, //eslint-disable-line
-	SCREEN_CENTER, //eslint-disable-line
-} from '@lagrange/animator';
+import Animator from '@lagrange/animator';
+
+const {
+	ELEM_BOTTOM,
+	ELEM_CENTER,
+	ELEM_TOP,
+	SCREEN_BOTTOM,
+	SCREEN_CENTER,
+	SCREEN_TOP,
+} = Animator.getConstants();
 
 export const Animations = {
 	get(width) {
