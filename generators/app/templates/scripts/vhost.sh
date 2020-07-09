@@ -99,7 +99,11 @@ fi
 
 
 echo Restarting apache2...
-sudo service apache2 restart > /dev/null
+if [ -f service ]; then
+	sudo service apache2 restart > /dev/null
+else
+	sudo apachectl -k restart
+fi
 
 
 echo Done! Try it out! : https://"$site"
