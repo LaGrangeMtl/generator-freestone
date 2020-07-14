@@ -1,0 +1,10 @@
+/*
+Theme Name: <%= props.projectName %>
+Author: La Grange
+Author URI: https://la-grange.ca/
+Version: 1.3
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
+Text Domain: <%= props.projectNamespace %>
+*/

@@ -1,0 +1,55 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+Thumbs.db
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+
+# Folders to ignore
+.hg
+.svn
+.CVS
+.idea
+node_modules
+bower_components
+/vendor
+/dist/vendor
+_cache
+_optimization
+db/sync
+_workdir
+.ssl
+
+dist/uploads/img/[0-9]*prc
+dist/uploads/img-tiny
+
+dist/assets/css/index.css
+dist/assets/css/index.css.map
+dist/assets/js/index.js
+dist/assets/js/index.js.map
+
+dist/wp-content/uploads/2020
+dist/wp-content/uploads/cache
+
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/css/index.css
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/css/index.css.map
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/css/index-admin.css.map
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/css/index-admin.css
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/js/index.js
+dist/wp-content/themes/<%= props.projectNamespace %>/assets/js/index.js.map

@@ -13,6 +13,9 @@ var getSalt = function (len) {
 	return salt;
 }
 
+const FREESTONE = 'Freestone';
+const WORDPRESS = 'WordPress';
+const STATIC = 'Statique';
 module.exports = class extends Generator {
 	constructor(args, opts) {
 		super(args, opts);
@@ -29,10 +32,11 @@ module.exports = class extends Generator {
 				default: this.appname,
 			},
 			{
-				type: "confirm",
-				name: "isFreestone",
-				message: "Utilise freestone ?",
-				default: true,
+				type: "list",
+				name: "tech",
+				message: "Quelle techno?",
+				choices: [FREESTONE, WORDPRESS, STATIC],
+				default: FREESTONE,
 			}
 		];
 		
@@ -47,83 +51,101 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		let tplFiles = [
-			'package.json',
-			'scripts/deploy.sh',
-			'src/js/NameSpace.js',
-		];
+		this.commonProps = {
+			projectName: _.kebabCase(this.props.projectName),
+			projectNamespace: _.camelCase(this.props.projectName),
+		};
+		
+		this.freestoneProps = {
+			projectPhpNamespace: _.startCase(_.camelCase(this.props.projectName)).replace(' ', ''),
+			salt: getSalt(),
+			secret: getSalt(65),
+			dbPassDev: getSalt(16),
+			dbPassStaging: getSalt(16),
+		};
 
-		let excluded = [
-			'.DS_Store',
-			'package-lock.json',
-		];
-
-		if (!this.props.isFreestone) {
-			tplFiles = [
-				...tplFiles,
-				'dist/index.html',
-			];
-			excluded = [
-				this.templatePath('db'),
-				this.templatePath('dist/admin'),
-				this.templatePath('dist/config'),
-				this.templatePath('dist/modules'),
-				this.templatePath('dist/uploads'),
-				this.templatePath('dist/views'),
-				this.templatePath('dist/.htaccess'),
-				this.templatePath('dist/api.php'),
-				this.templatePath('dist/bootstrap.php'),
-				this.templatePath('dist/composer.json'),
-				this.templatePath('dist/Hooks.php'),
-				this.templatePath('dist/imageBank.php'),
-				this.templatePath('dist/index.php'),
-				this.templatePath('config'),
-			];
-		} else {
-			tplFiles = [
-				...tplFiles,
-				'config/',
-				'dist/admin/hooks/AbstractHook.php',
-				'dist/config/config.php',
-				'dist/views/partials/head.twig',
-			]
-			excluded = [
-				this.templatePath('dist/index.html'),
-			];
-		}
-
-		this.fs.copy(
-			this.templatePath('**/*'),
+		this.fs.copyTpl(
+			this.templatePath('common/**/*'),
 			this.destinationPath(''),
 			{
-				globOptions: {
-					dot: true,
-					ignore: [
-						...tplFiles,
-						...excluded
-					]
-				},
+				props: {
+					...this.commonProps,
+				}
 			},
+			null,
+			{ globOptions: { dot: true } },
 		);
 
-		tplFiles.forEach(path => {
+		if (this.props.tech === FREESTONE) {
 			this.fs.copyTpl(
-				this.templatePath(path),
-				this.destinationPath(path),
+				this.templatePath('freestone/**/*'),
+				this.destinationPath(''),
 				{
 					props: {
-						projectName: _.kebabCase(this.props.projectName),
-						projectNamespace: _.camelCase(this.props.projectName),
-						projectPhpNamespace: _.startCase(_.camelCase(this.props.projectName)).replace(' ', ''),
-						salt: getSalt(),
-						secret: getSalt(65),
-						dbPassDev: getSalt(16),
-						dbPassStaging: getSalt(16),
+						...this.commonProps,
+						...this.freestoneProps,
 					}
-				}
+				},
+				null,
+				{ globOptions: { dot: true } },
 			);
-		});
+		}
 
+		if (this.props.tech === WORDPRESS) {
+			this.fs.copyTpl(
+				this.templatePath('wordpress/**/*'),
+				this.destinationPath(''),
+				{
+					props: {
+						...this.commonProps,
+						...this.freestoneProps,
+					}
+				},
+				null,
+				{
+					globOptions: {
+						dot: true,
+						ignore: [
+							'**/plugins'
+						]
+					},
+				},
+			);
+
+			this.fs.copy(
+				this.templatePath('wordpress/**/*'),
+				this.destinationPath(''),
+				{
+					props: {
+						...this.commonProps,
+						...this.freestoneProps,
+					}
+				},
+				null,
+				{
+					globOptions: {
+						dot: true,
+						ignore: [
+							'**/themes'
+						]
+					},
+				},
+			);
+
+		}
+	}
+	
+	install() {
+		if (this.props.tech === WORDPRESS) {
+			this.spawnCommand('wp', ['core', 'download', '--path=dist/', '--skip-content']);
+		}
+		
 		this.installDependencies();
+	}
+
+	end() {
+		if (this.props.tech === WORDPRESS) {
+			this.spawnCommand('mv', ['dist/wp-content/themes/_THEME_', 'dist/wp-content/themes/' + this.commonProps.projectNamespace]);
+		}
 	}
 }
