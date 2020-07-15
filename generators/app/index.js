@@ -126,7 +126,8 @@ module.exports = class extends Generator {
 					globOptions: {
 						dot: true,
 						ignore: [
-							'**/themes'
+							'**/themes',
+							'scripts'
 						]
 					},
 				},
