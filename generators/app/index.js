@@ -72,7 +72,7 @@ module.exports = class extends Generator {
 					...this.commonProps,
 				}
 			},
-			null,
+			{},
 			{ globOptions: { dot: true } },
 		);
 
@@ -86,7 +86,7 @@ module.exports = class extends Generator {
 						...this.freestoneProps,
 					}
 				},
-				null,
+				{},
 				{ globOptions: { dot: true } },
 			);
 		}
@@ -98,10 +98,9 @@ module.exports = class extends Generator {
 				{
 					props: {
 						...this.commonProps,
-						...this.freestoneProps,
 					}
 				},
-				null,
+				{},
 				{
 					globOptions: {
 						dot: true,
@@ -113,26 +112,9 @@ module.exports = class extends Generator {
 			);
 
 			this.fs.copy(
-				this.templatePath('wordpress/**/*'),
-				this.destinationPath(''),
-				{
-					props: {
-						...this.commonProps,
-						...this.freestoneProps,
-					}
-				},
-				null,
-				{
-					globOptions: {
-						dot: true,
-						ignore: [
-							'**/themes',
-							'scripts'
-						]
-					},
-				},
+				this.templatePath('wordpress/dist/wp-content/plugins'),
+				this.destinationPath('dist/wp-content/plugins'),
 			);
-
 		}
 	}
 	
