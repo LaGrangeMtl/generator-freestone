@@ -13,6 +13,6 @@ class PostTypes {
 	}
 
 	static function register_post_types() {
-		// Example: CustomPostType::register('Test', 'Tests', Env::$domain);
+		// Example: CustomPostType::register('test', 'Test', 'Tests');
 	}
 }
