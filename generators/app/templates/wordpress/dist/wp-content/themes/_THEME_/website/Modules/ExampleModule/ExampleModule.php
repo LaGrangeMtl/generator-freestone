@@ -1,6 +1,6 @@
 <?php
 
-namespace Website\Modules\ExampleModule;
+namespace Website\Modules;
 
 class ExampleModule {
 	static function init() {
