@@ -19,8 +19,12 @@ class TestBlock implements Block {
 	}
 
 	public function render($block, $content = '', $is_preview = false, $post_id = 0) {
-?>
-	Test in template
-<?php
+		TestBlock::template();
+	}
+
+	static public function template(/* list of template params */) {
+		?>
+			Test in template
+		<?php
 	}
 }
