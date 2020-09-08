@@ -10,6 +10,7 @@ namespace Website\Hooks;
 class Filters {
 	static function addAll() {
 		add_filter('body_class', [get_called_class(), 'add_slug_body_class']);
+		add_filter('the_content',[get_called_class(), 'add_lazy_load_attributes']);
 	}
 
 	static function add_slug_body_class($class) {
@@ -20,5 +21,13 @@ class Filters {
 		}
 		
 		return $class;
+	}
+
+	static function add_lazy_load_attributes($content) {
+		/* Add loading="lazy" to all images filtered by the_content */
+		$content = str_replace('<img','<img loading="lazy"', $content);
+		/* Add loading="lazy" to all iframes filtered by the_content */
+		$content = str_replace('<iframe','<iframe loading="lazy"', $content);
+		return $content;
 	}
 }
