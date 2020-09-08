@@ -116,6 +116,20 @@ module.exports = class extends Generator {
 				this.destinationPath('dist/wp-content/plugins'),
 			);
 		}
+
+		if (this.props.tech === STATIC) {
+			this.fs.copyTpl(
+				this.templatePath('static/**/*'),
+				this.destinationPath(''),
+				{
+					props: {
+						...this.commonProps,
+					}
+				},
+				{},
+				{ globOptions: { dot: true } },
+			);
+		}
 	}
 	
 	install() {
