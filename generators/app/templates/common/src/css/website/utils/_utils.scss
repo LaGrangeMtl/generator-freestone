@@ -15,6 +15,42 @@
 	}
 }
 
+@function fontSizeCalc($min, $max) {
+	$minrem: fsRem($min);
+	$maxrem: fsRem($max);
+	$remMinWidth: (991 / 16);
+	$remMaxWidth: (1920 - 991) / 16;
+	
+	@return calc(#{$minrem + 'rem'} + (#{$maxrem} - #{$minrem}) * ((100vw - #{$remMinWidth + 'rem'}) / #{$remMaxWidth}));
+}
+
+@mixin fontSize($min, $max) {
+	font-size: fontSizeCalc($min, $max);
+
+	@include at-least('1921px') {
+		font-size: fs($max);
+	}
+}
+
+@mixin at-most($width){
+	@media all and (max-width: $width){
+		@content;
+	}
+}
+
+@mixin at-least($width){
+	@media all and (min-width: $width){
+		@content;
+	}
+}
+
+@function rs($sizeValue) {
+	@return ($sizeValue * 100 / 1920) * 1vw;
+}
+
+@function fsRem($sizeValue) {
+	@return strip-unit($sizeValue) / 16;
+}
 
 @mixin create-spritesheet($gridSettings, $sprites){
 	$gridW: map-get($gridSettings, width);
