@@ -1,3 +1,5 @@
+<?php require_once("Utils.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
