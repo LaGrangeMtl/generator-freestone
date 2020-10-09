@@ -225,7 +225,7 @@ function wrap($wrapper, $str) {
 }
 
 /**
- * Removes a key or index in an array
+ * Removes a key or index in every row of this array
  *
  * @param array $array
  * @param string|int $offset
@@ -239,6 +239,7 @@ function deleteColumn(&$array, $offset) {
 
 /**
  * Change string case to camel case.
+ * Ex: ThisIsAString
  *
  * @param string $str
  * @return string
@@ -261,6 +262,7 @@ function camel($str, $firstLetterIsUpper = true) {
 
 /**
  * Change string case to kebab case.
+ * Ex: this-is-a-string
  *
  * @param string $str
  * @return string
@@ -271,6 +273,7 @@ function kebab($str) {
 
 /**
  * Change string case to snake case.
+ * Ex: this_is_a_string
  *
  * @param string $str
  * @return string
@@ -299,6 +302,7 @@ function snake($str) {
 
 /**
  * Change string case to lower case.
+ * Ex: thisisastring
  *
  * @param string $str
  * @return string
@@ -309,6 +313,7 @@ function lower($str) {
 
 /**
  * Change string case to upper case.
+ * Ex: THISISASTRING
  *
  * @param string $str
  * @return string
@@ -353,10 +358,10 @@ function len($var) {
 }
 
 /**
- * Filters an array or object where the passed key matches 
+ * Filters an array of array or objects where the passed key matches 
  * the passed value
  *
- * @param object|array $iter
+ * @param object[]|array[] $iter
  * @param string|int $searched_key
  * @param mixed $searched_value
  * @return array
@@ -569,9 +574,9 @@ function newId($prefix = "") {
 }
 
 /**
- * Flattens an array into a new array
+ * Flattens an array of arrays into a new array
  *
- * @param array $array
+ * @param array[] $array
  * @return array
  */
 function flat($array) {
@@ -616,7 +621,7 @@ function timestamp($format = 'Y-m-d H:i:s.u T', $uTimestamp = null) {
 }
 
 /**
- * Call defined function with an array of parameters
+ * Returns a callable with no arguments that calls a function with an array of parameters
  *
  * @param callable $function
  * @param array $params
@@ -662,7 +667,8 @@ function merge($lower, $upper) {
 }
 
 /**
- * Alias for array_combine
+ * Alias for array_combine.
+ * Creates and returns an associative array out of an array of keys and an array of values.
  *
  * @param array $keys
  * @param array $values
@@ -672,6 +678,13 @@ function zip($keys, $values) {
 	return array_combine($keys, $values);
 }
 
+/**
+ * Returns an associative array keyed by the values for the specified key.
+ *
+ * @param array $iterable
+ * @param string|int $key
+ * @return array
+ */
 function keyBy($iterable, $key) {
 	return array_column($iterable, null, $key);
 }
