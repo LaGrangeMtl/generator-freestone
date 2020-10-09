@@ -161,10 +161,10 @@ function sorted($iter) {
 }
 
 /**
- * Reverses the order of the object or array
+ * Reverses the order of an array
  *
- * @param object|array $iterable
- * @return object|array
+ * @param array $iterable
+ * @return array
  */
 function reversed($array, $preserve_keys=true) {
 	return array_reverse($array, $preserve_keys);
