@@ -33,7 +33,7 @@ Installer le générateur
 npm install -g generator-freestone
 ```
 
-Après on peut scaffolder en faisant
+Après on peut scaffolder en faisant dans un autre dossier vide (qui contiendra le projet)
 
 ```sh
 yo freestone
