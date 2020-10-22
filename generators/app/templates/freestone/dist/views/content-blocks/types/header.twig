@@ -7,8 +7,6 @@
         <div class="row header-wrapper {{ blockType }}">
             {% if contentBlock.background_image %}
                 <div class="bg bg-align-{{bgalign}}" style="background-image: url('{{ fs_src(contentBlock.background_image) }}');"></div>
-            {% else %}
-                <div class="bg bg-align-{{bgalign}}" style="background-image: url('{{ dir }}assets/img/career-header.jpg');"></div>
             {% endif %}
 
             <div class="col-xl-4 col-md-5 col-sm-6 offset-sm-1 content {{ contentBlock.text_align }}">
