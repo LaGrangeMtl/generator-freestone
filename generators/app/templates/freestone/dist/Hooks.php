@@ -12,10 +12,17 @@ class Hooks {
 	}
 
 	/**
-	 * S3 fix for CORS images
+	 * Adds lazy loading and fixes CORS issues with external images.
+	 * @param $attrs
+	 * @param $infos
+	 *
+	 * @return array
 	 */
 	public static function modifyImageBankItemAttrs($attrs, $infos) {
-		if ($infos["external_url"]) return array_merge($attrs, ['crossorigin="anonymous"']);
+		$attrs = array_merge($attrs, ['loading="lazy"']);
+		if ($infos["external_url"]) {
+			$attrs = array_merge($attrs, ['crossorigin="anonymous"']);
+		}
 		return $attrs;
 	}
 }
