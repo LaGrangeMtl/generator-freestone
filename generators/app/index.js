@@ -60,6 +60,7 @@ module.exports = class extends Generator {
 			projectPhpNamespace: _.startCase(_.camelCase(this.props.projectName)).replace(' ', ''),
 			salt: getSalt(),
 			secret: getSalt(65),
+			dbPassLocal: getSalt(16),
 			dbPassDev: getSalt(16),
 			dbPassStaging: getSalt(16),
 		};
