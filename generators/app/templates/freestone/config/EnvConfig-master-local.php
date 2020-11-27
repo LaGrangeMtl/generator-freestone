@@ -2,7 +2,7 @@
 namespace Freestone;
 
 VEnv::addEnv('local', ['.local', '.lol', '.com', '.ca'], [
-	'dbServer' => '192.168.1.199',
+	'dbServer' => 'localhost',
 	'dbName' => '<%= props.projectName %>_master_local',
 	'dbUser' => '<%= props.projectName %>_master_local',
 	'dbPass' => '<%= props.dbPassLocal %>',
