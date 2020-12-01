@@ -1,9 +1,6 @@
 <?php
 
 namespace Freestone;
-use Freestone\VEnv;
-use Freestone\VQuery;
-use Freestone\Frontendv2\Website;
 
 class Hooks {
 
@@ -12,17 +9,13 @@ class Hooks {
 	}
 
 	/**
-	 * Adds lazy loading and fixes CORS issues with external images.
+	 * Adds loading attribute to images to enable lazy loading.
 	 * @param $attrs
 	 * @param $infos
 	 *
 	 * @return array
 	 */
 	public static function modifyImageBankItemAttrs($attrs, $infos) {
-		$attrs = array_merge($attrs, ['loading="lazy"']);
-		if ($infos["external_url"]) {
-			$attrs = array_merge($attrs, ['crossorigin="anonymous"']);
-		}
-		return $attrs;
+		return array_merge($attrs, ['loading="lazy"']);
 	}
 }
