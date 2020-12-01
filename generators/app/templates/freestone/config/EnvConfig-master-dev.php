@@ -1,7 +1,7 @@
 <?PHP
 namespace Freestone;
 
-VEnv::addEnv('enclos', ['.enclos.ca'], [
+VEnv::addEnv('dev', ['.enclos.ca'], [
 	'dbServer' => 'localhost',
 	'dbName' => '<%= props.projectName %>_master_dev',
 	'dbUser' => '<%= props.projectName %>_master_dev',

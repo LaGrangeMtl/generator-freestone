@@ -1,7 +1,7 @@
 <?PHP
 namespace Freestone;
 
-VEnv::addEnv('produs', ['.com'], [
+VEnv::addEnv('prod', ['.com', '.ca'], [
 	'dbServer' => 'localhost',
 	'dbName' => '<%= props.projectName %>_master_prod',
 	'dbUser' => '',

@@ -2,10 +2,10 @@
 namespace Freestone;
 
 VEnv::addEnv('local', ['.local', '.lol', '.com', '.ca'], [
-	'dbServer' => '192.168.1.199',
+	'dbServer' => 'local.enclos.ca',
 	'dbName' => '<%= props.projectName %>_master_local',
-	'dbUser' => 'remote',
-	'dbPass' => 'remote',
+	'dbUser' => '<%= props.projectName %>_master_local',
+	'dbPass' => '<%= props.dbPassLocal %>',
 	'cacheConfig' => [
 		'life' => 3600,
 		'noCacheVars' => false,
