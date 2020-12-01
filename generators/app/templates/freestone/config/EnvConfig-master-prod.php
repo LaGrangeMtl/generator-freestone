@@ -1,25 +1,15 @@
-<?PHP
+<?php
+
 namespace Freestone;
 
-VEnv::addEnv('prod', ['.com', '.ca'], [
-	'dbServer' => 'localhost',
-	'dbName' => '<%= props.projectName %>_master_prod',
-	'dbUser' => '',
-	'dbPass' => '',
-	'cacheConfig' => [
-		'life' => 3600,
-		'noCacheVars' => false,
-	],
+VEnv::$dbServer = 'localhost';
+VEnv::$dbName = '<%= props.projectName %>_master_prod';
+VEnv::$dbUser = '';
+VEnv::$dbPass = '';
 
-	'isDev' => false,
-	'forceWww' => false,
-	'api'=> [
+VEnv::$isDev = false;
+VEnv::$forceWww = true;
 
-	]
-]);
-
-ClientSettings::$settings['gtm_ca'] = '';
-ClientSettings::$settings['gtm_us'] = '';
 ClientSettings::$settings['site_name'] = '<%= props.projectName %>';
 ClientSettings::$settings['regions']['ca']['tld'] = 'ca';
 ClientSettings::$settings['regions']['ca']['use_region_as_prefix'] = false;
