@@ -2,7 +2,7 @@
 {% set nav = fs_module('Nav') %}
 
 <nav class="top-menu">
-	<ul class="" role="tablist">
+	<ul class="">
 		{{ include('menu/menu-branch.twig', {branch: nav.top, level: 1}) }}
 		
 		{% for language in languages %}
