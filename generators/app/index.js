@@ -1,10 +1,14 @@
 const _ = require('lodash');
 const Generator = require('yeoman-generator');
 
-var getSalt = function (len) {
+var getLowerCaseLetters = function () {
+	return 'abcdefghijklmnopqrstuvwxyz';
+};
+
+var getSalt = function (len, set) {
 	len = len || 20;
-	var set = '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ -!$%?&*()=_+|£¢@{}[];:',
-		setLen = set.length,
+	set = set || '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ -!$%?&*()=_+|£¢@{}[];:';
+	var	setLen = set.length,
 		salt = '';
 	for (var i = 0; i < len; i++) {
 		var p = Math.floor(Math.random() * setLen);
@@ -63,6 +67,15 @@ module.exports = class extends Generator {
 			dbPassLocal: getSalt(16),
 			dbPassDev: getSalt(16),
 			dbPassStaging: getSalt(16),
+			wpAuthKey: getSalt(64),
+			wpSecureAuthKey: getSalt(64),
+			wpLoggedInKey: getSalt(64),
+			wpNonceKey: getSalt(64),
+			wpAuthSalt: getSalt(64),
+			wpSecureAuthSalt: getSalt(64),
+			wpLoggedInSalt: getSalt(64),
+			wpNonceSalt: getSalt(64),
+			wpTablePrefix: getSalt(6, getLowerCaseLetters()),
 		};
 
 		this.fs.copyTpl(
