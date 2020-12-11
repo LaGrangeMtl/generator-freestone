@@ -7,7 +7,7 @@ var getLowerCaseLetters = function () {
 
 var getSalt = function (len, set) {
 	len = len || 20;
-	set = set || '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ -!$%?&*()=_+|£¢@{}[];:';
+	set = set || '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ -!$%?*()=_+|£¢@{}[];:';
 	var	setLen = set.length,
 		salt = '';
 	for (var i = 0; i < len; i++) {
@@ -67,15 +67,18 @@ module.exports = class extends Generator {
 			dbPassLocal: getSalt(16),
 			dbPassDev: getSalt(16),
 			dbPassStaging: getSalt(16),
-			wpAuthKey: getSalt(64),
-			wpSecureAuthKey: getSalt(64),
-			wpLoggedInKey: getSalt(64),
-			wpNonceKey: getSalt(64),
-			wpAuthSalt: getSalt(64),
-			wpSecureAuthSalt: getSalt(64),
-			wpLoggedInSalt: getSalt(64),
-			wpNonceSalt: getSalt(64),
-			wpTablePrefix: getSalt(6, getLowerCaseLetters()),
+		};
+
+		this.wordpressProps = {
+			authKey: getSalt(64),
+			secureAuthKey: getSalt(64),
+			loggedInKey: getSalt(64),
+			nonceKey: getSalt(64),
+			authSalt: getSalt(64),
+			secureAuthSalt: getSalt(64),
+			loggedInSalt: getSalt(64),
+			nonceSalt: getSalt(64),
+			tablePrefix: getSalt(6, getLowerCaseLetters()),
 		};
 
 		this.fs.copyTpl(
@@ -112,6 +115,7 @@ module.exports = class extends Generator {
 				{
 					props: {
 						...this.commonProps,
+						...this.wordpressProps,
 					}
 				},
 				{},
