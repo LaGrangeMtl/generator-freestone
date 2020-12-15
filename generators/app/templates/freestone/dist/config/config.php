@@ -4,6 +4,7 @@ namespace Freestone;
 
 use Freestone\Config\AbstractClientSettings;
 
+require_once(__DIR__.'/../Hooks.php');
 
 // Values in this file may be override in EnvConfig-<branch>-<env>.php
 
