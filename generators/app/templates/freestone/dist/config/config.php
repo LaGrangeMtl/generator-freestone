@@ -16,9 +16,6 @@ VEnv::$siteName = '<%= props.projectName %>';
 // Assets version to prevent cache.
 VEnv::$assetsVersion = '0';
 
-// Array of css to display in html fields of the admin.
-VEnv::$pathCss = ['css/index.css'];
-
 VEnv::$defaultID = 1;
 VEnv::$defaultLang = 'fr';
 VEnv::$defaultTable = 'page';
