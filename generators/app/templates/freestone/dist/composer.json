@@ -10,11 +10,6 @@
 		}
 	],
 	"require": {
-		"la-grange/freestone-backend": "3.3.2",
-		"phpoffice/phpexcel": "1.8.1",
-		"guzzlehttp/guzzle": "~6.0",
-		"ext-json": "*",
-		"ext-simplexml": "*",
-		"ext-zip": "*"
+		"la-grange/freestone-backend": "3.4.4"
 	}
 }
