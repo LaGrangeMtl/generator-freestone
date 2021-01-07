@@ -1,4 +1,4 @@
-import { TweenMax, Power2 } from 'gsap';
+import gsap, { Power2 } from 'gsap';
 import offset from './offset.js';
 
 const defaults = {
@@ -11,7 +11,7 @@ const defaults = {
 };
 
 /**
- * Scrolls to position using TweenMax. If an offset is 
+ * Scrolls to position using gsap. If an offset is 
  * defined, scrolls that amount higher than the target element.
  *
  * @param {Number} pos
@@ -24,7 +24,8 @@ export const scrollTo = (pos, options = {}) => {
 		y: opt.container.scrollTop,
 	};
 
-	TweenMax.to(scroll, opt.duration, {
+	gsap.to(scroll, {
+		duration: opt.duration,
 		y: pos + opt.offset,
 		ease: opt.ease || Power2.easeInOut,
 		onUpdate: () => {

@@ -1,6 +1,6 @@
 //@ts-check
 
-import { TweenMax, Power1 } from 'gsap';
+import gsap, { Power1 } from 'gsap';
 
 /**
  * @param {HTMLElement} elem 
@@ -9,7 +9,7 @@ import { TweenMax, Power1 } from 'gsap';
  */
 export function slideUp(elem, time = 0.3, ease = Power1.easeOut) {
 	return new Promise((resolve) => {
-		TweenMax.to(elem, time, { height: 0, onComplete: resolve, ease });
+		gsap.to(elem, { duration: time, height: 0, onComplete: resolve, ease });
 	});
 }
 
@@ -20,7 +20,7 @@ export function slideUp(elem, time = 0.3, ease = Power1.easeOut) {
  */
 export function slideDown(elem, time = 0.3, ease = Power1.easeOut) {
 	return new Promise((resolve) => {
-		TweenMax.to(elem, time, { height: elem.scrollHeight, onComplete: resolve, ease });
+		gsap.to(elem, { duration: time, height: elem.scrollHeight, onComplete: resolve, ease });
 	});
 }
 

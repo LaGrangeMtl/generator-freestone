@@ -1,33 +1,58 @@
 // @ts-check
-
 import VirtualScroll from 'virtual-scroll';
-import imagesLoaded from 'imagesloaded';
 import Animator from '@lagrange/animator';
-
 import Scroller, { SMOOTH_SCROLLER } from './Scroller';
 import { lerp } from '../utils/lerp';
 import { preventScroll } from './functions/preventScroll';
 import ScrollModule from './ScrollModule';
 import precision from '../utils/precision';
+import { Animations } from '../Animations';
+import { map } from '../utils/map';
+import { debounceAnimationFrame } from '../utils/animation';
 
+const LS_KEY = 'smooth_scroll';
 const html = document.querySelector('html');
 
+const winDim = {
+	height: window.innerHeight,
+	width: window.innerWidth,
+};
+
+/**
+ * @typedef {object} Section
+ * @property {HTMLElement} node
+ * @property {number} top
+ * @property {number} bottom
+ */
 export class SmoothScroller extends Scroller {
 	/** @type {VirtualScroll} */
 	scroll = null;
+
 	/** @type {HTMLElement} */
 	el = null;
+
 	height = 0;
+
 	scrolltop = 0;
+
 	lastScrollTop = 0;
+
 	targetScrollTop = 0;
+
 	freezeScroll = false;
+
 	isScrubbing = false;
+
 	loop = null;
+
 	/** @type {Section[]} */
 	sections = [];
+
 	/** @type {ScrollModule[]} */
 	sectionModules = [];
+
+	hasCustomHashFunction = false;
+
 	/**
 	 * @param {HTMLElement} el 
 	 */
@@ -42,12 +67,12 @@ export class SmoothScroller extends Scroller {
 		this.setupEvents();
 		this.updateScrollHeight();
 		document.documentElement.classList.add('smooth-scroll');
-		imagesLoaded(el, this.updateScrollHeight);
 		this.initialScroll();
 		this.update(0, true);
 		Scroller.addToList(this);
 		this.onResize();
 	}
+
 	createScrollbar = () => {
 		this.scrollbar = document.createElement('div');
 		this.scrollbar.classList.add('scrollbar');
@@ -56,6 +81,7 @@ export class SmoothScroller extends Scroller {
 		this.scrollbar.appendChild(this.thumb);
 		this.el.appendChild(this.scrollbar);
 	}
+
 	initialScroll = () => {
 		let ls = sessionStorage.getItem(LS_KEY);
 		if (ls) {
@@ -66,6 +92,7 @@ export class SmoothScroller extends Scroller {
 			}
 		}
 	}
+
 	setInitialScroll = () => {
 		const url = window.location.href;
 		sessionStorage.setItem(LS_KEY, JSON.stringify({
@@ -74,9 +101,14 @@ export class SmoothScroller extends Scroller {
 			},
 		}));
 	}
+
 	refreshElements = (ctx = null) => {
 		const context = ctx || document;
-		const els = /** @type {HTMLElement[]} */ (Array.from(context.querySelectorAll('[data-scroll-section]')));
+		let els = /** @type {HTMLElement[]} */ (Array.from(context.querySelectorAll('[data-scroll-section]')));
+
+		//Filter nested data-scroll-sections
+		els = els.filter(section => !section.parentElement.closest('[data-scroll-section]'));
+
 		this.sections = els.map(el => {
 			return {
 				node: el,
@@ -97,6 +129,7 @@ export class SmoothScroller extends Scroller {
 			return sm;
 		});
 	}
+
 	initVirtualScroll = (el) => {
 		this.scroll = new VirtualScroll({
 			el,
@@ -106,6 +139,7 @@ export class SmoothScroller extends Scroller {
 			useKeyboard: false,
 		});
 	}
+
 	/**
 	 * @param {KeyboardEvent} e
 	 */
@@ -120,33 +154,46 @@ export class SmoothScroller extends Scroller {
 				this.el.scrollTop = 0;
 				this.el.scrollLeft = 0;
 				// @ts-ignore
-				this.scrollToElem(document.activeElement, window.innerHeight / 2); 
+				this.scrollToElem(document.activeElement, winDim.height / 2); 
 			});
 		}
 	};
+
 	constrainScrollTop = () => {
-		this.targetScrollTop = Math.max((this.height - window.innerHeight) * -1, this.targetScrollTop);
+		this.targetScrollTop = Math.max((this.height - winDim.height) * -1, this.targetScrollTop);
 		this.targetScrollTop = Math.min(0, this.targetScrollTop);
 	}
+
 	onThumbMouseDown = (e) => {
 		this.isScrubbing = true;
 		this.scrollbar.classList.add('active');
 		document.addEventListener('mousemove', this.onThumbMouseMove);
 		document.addEventListener('mouseup', this.onThumbMouseUp);
 	}
+
 	/**
 	 * @param {MouseEvent} e
 	 */
 	onThumbMouseMove = (e) => {
-		const scrollTop = map(e.clientY, 0, window.innerHeight, 0, -this.height);
+		const scrollTop = map(e.clientY, 0, winDim.height, 0, this.height);
 		this.scrollTo(scrollTop);
 	}
+
 	onThumbMouseUp = () => {
 		this.isScrubbing = false;
 		this.scrollbar.classList.remove('active');
 		document.removeEventListener('mousemove', this.onThumbMouseMove);
 		document.removeEventListener('mouseup', this.onThumbMouseUp);
 	}
+
+	onHashChange = () => {
+		const { hash } = window.location;
+		if (this.hasCustomHashFunction || !hash) return false;
+
+		const elem = document.querySelector(hash);
+		if (elem) this.scrollToElem(elem);
+	}
+
 	setupEvents = () => {
 		this.scroll.on((e) => {
 			if (!this.freezeScroll) {
@@ -158,7 +205,9 @@ export class SmoothScroller extends Scroller {
 		this.thumb.addEventListener('mousedown', this.onThumbMouseDown);
 		window.addEventListener('resize', this.onResize);
 		window.addEventListener('keydown', this.onKeyDown, false);
+		window.addEventListener('hashchange', this.onHashChange);
 	}
+
 	update = debounceAnimationFrame((time = 0, force = false) => {
 		this.scrollTop = lerp(this.scrollTop, this.targetScrollTop, this.isScrubbing ? 0.05 : 0.1);
 		this.setInitialScroll();
@@ -169,14 +218,14 @@ export class SmoothScroller extends Scroller {
 				}
 			);
 			// if (!this.isScrubbing) {
-			const percent = -this.scrollTop / (this.height - window.innerHeight);
-			const final = map(percent, 0, 1, 0, 100 - (window.innerHeight / this.height * 100));
+			const percent = -this.scrollTop / (this.height - winDim.height);
+			const final = map(percent, 0, 1, 0, 100 - (winDim.height / this.height * 100));
 			this.thumb.style.transform = `translate(0, ${final}vh)`;
 			// }
 			this.sections.forEach((section, i) => {
-				const { node } = section;
+				const { node, bottom, top } = section;
 				if (node.classList.contains('js-sticky')) return;
-				if (section.bottom > -this.scrollTop - window.innerHeight && section.top < -this.scrollTop + (window.innerHeight) * 2) {
+				if (bottom > -this.scrollTop - winDim.height && top < -this.scrollTop + (winDim.height) * 2) {
 					node.classList.add('section-visible');
 					node.style.transform = `matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,0,${this.scrollTop},0,1)`;
 				} else {
@@ -189,43 +238,54 @@ export class SmoothScroller extends Scroller {
 		// this.el.setAttribute('data-scroll-top', this.scrollTop.toString());
 		this.lastScrollTop = this.scrollTop;
 	})
+
 	updateSections = () => {
 		const olds = this.sections.map(section => {
 			const old = section.node.style.transform;
 			section.node.style.transform = '';
+			section.node.style.visibility = 'visible';
 			return old;
 		});
-		Animator.instances.forEach(instance => instance.setAnimations(Animations.get(window.innerWidth)));
+		Animator.instances.forEach(instance => instance.setAnimations(Animations.get(winDim.width)));
 		this.sections.forEach((section, i) => {
 			const rect = section.node.getBoundingClientRect();
 			section.node.style.transform = olds[i];
+			section.node.style.visibility = '';
 			section.top = rect.top;
 			section.bottom = rect.bottom;
 		});
 	}
+
 	onResize = () => {
+		winDim.height = window.innerHeight;
+		winDim.width = window.innerWidth;
+
 		this.updateSections();
 		this.updateScrollHeight();
 	}
+
 	updateScrollHeight = () => {
-		this.height = this.el.scrollHeight;
-		this.thumb.style.height = (window.innerHeight / this.height * 100) + '%';
+		this.height = this.el.offsetHeight;
+		this.thumb.style.height = (winDim.height / this.height * 100) + '%';
 		this.setScroll(this.scrollTop);
 	}
+
 	setScroll = (value) => {
 		this.targetScrollTop = value;
 		this.scrollTop = value;
 		this.constrainScrollTop();
 		this.update(0, true);
 	}
+
 	/**
 	 * @param {number} value
 	 */
 	scrollTo = (value) => {
-		this.targetScrollTop = value;
+		this.targetScrollTop = -value;
 		this.constrainScrollTop();
 		this.update(0, true);
 	}
+
 	/**
 	 * @param {HTMLElement} elem
 	 * @param {Object} options
@@ -240,7 +300,7 @@ export class SmoothScroller extends Scroller {
 			section.node.style.transform = '';
 			return old;
 		});
-		const position = -elem.getBoundingClientRect().top + opt.offset;
+		const position = elem.getBoundingClientRect().top + opt.offset;
 		this.sections.forEach((section, i) => {
 			section.node.style.transform = olds[i];
 		});
