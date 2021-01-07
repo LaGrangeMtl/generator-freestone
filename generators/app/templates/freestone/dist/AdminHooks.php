@@ -11,7 +11,7 @@ class AdminHooks {
 	 */
 	public static function getHtmlEditorConfig() {
 		return [
-			'content_css' => VEnv::$absoluteClientDir . 'assets/css/index-wysiwyg.css',
+			'content_css' => [VEnv::$absoluteClientDir . 'assets/css/index-wysiwyg.css'],
 			'style_formats' => [
 				// see : https://www.tiny.cloud/docs/configure/content-formatting/#formats
 				// [
