@@ -28,7 +28,7 @@
 		"@lagrange/barba-core": "^2.3.21",
 		"Promise": "^1.0.5",
 		"bluebird": "^3.5.5",
-		"gsap": "^2.1.3",
+		"gsap": "^3.5.1",
 		"imagesloaded": "^4.1.4",
 		"transformation-matrix": "^2.0.5",
 		"virtual-scroll": "^1.5.2",

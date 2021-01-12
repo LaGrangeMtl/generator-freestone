@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import imagesloaded from 'imagesloaded';
-import { TweenMax, Power4 } from 'gsap';
+import gsap, { Power4 } from 'gsap';
 import barba from '@lagrange/barba-core';
 
 import ns from './NameSpace';
@@ -49,13 +49,13 @@ function init(modules, updateAnimator) {
 			},
 			leave() {
 				return new Promise(resolve => {
-					TweenMax.delayedCall(0.7, resolve);
+					gsap.delayedCall(0.7, resolve);
 				});
 			},
 			afterEnter({ next }) {
 				bootstrapContainer(next.container);
 
-				TweenMax.delayedCall(0.6, () => {
+				gsap.delayedCall(0.6, () => {
 					wiper.classList.remove('active');
 				});
 			},

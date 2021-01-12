@@ -1,6 +1,5 @@
 import Animator from '@lagrange/animator';
-import TweenMax from 'gsap/TweenMaxBase';
-import { Power3 } from 'gsap';
+import gsap, { Power3 } from 'gsap';
 import offset from '../utils/offset';
 
 import Scroller, { NATIVE_SCROLLER } from './Scroller';
@@ -66,6 +65,7 @@ export class NativeScroller extends Scroller {
 				animator.virtualScroll(this.el, scrollingElement.scrollTop);
 			}
 		);
+		this.runCallbacks();
 	}
 
 	setScroll = (value) => {
@@ -77,13 +77,14 @@ export class NativeScroller extends Scroller {
 	 */
 	scrollTo = (pos, options = {}) => {
 		const opt = Object.assign({}, defaults, options);
-
+		
 		const scroll = {
 			y: opt.container.scrollTop,
 		};
-
-		TweenMax.to(scroll, opt.duration, {
-			y: -pos + opt.offset + scroll.y,
+		
+		gsap.to(scroll, {
+			duration: opt.duration,
+			y: pos + opt.offset,
 			ease: opt.ease || Power3.easeInOut,
 			onUpdate: () => {
 				opt.container.scrollTop = scroll.y;
