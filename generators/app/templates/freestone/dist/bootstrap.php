@@ -31,3 +31,7 @@ use Freestone\VEnv;
 VEnv::$clientDir = '';
 VEnv::init(__DIR__.'/');
 VEnv::connectDb();
+
+# Fix for production servers that are often strict by default.
+use Freestone\VQuery;
+new VQuery("SET sql_mode='';");
