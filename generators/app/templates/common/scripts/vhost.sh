@@ -20,15 +20,18 @@ alias="www.$site"
 
 
 echo Updating /etc/hosts...
-ip=::1
+ipv6=::1
+ip=127.0.01
 if grep -q "$site$" /etc/hosts ; then
 	sudo sed -i "/\w$site$/ s/.*/$ip\t$site/g" /etc/hosts
 else
+	echo "$ipv6	$site" | sudo tee -a /etc/hosts > /dev/null
 	echo "$ip	$site" | sudo tee -a /etc/hosts > /dev/null
 fi
 if grep -q "$alias$" /etc/hosts ; then
 	sudo sed -i "/\w$alias$/ s/.*/$ip\t$alias/g" /etc/hosts
 else
+	echo "$ipv6	$alias" | sudo tee -a /etc/hosts > /dev/null
 	echo "$ip	$alias" | sudo tee -a /etc/hosts > /dev/null
 fi
 

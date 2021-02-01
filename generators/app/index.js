@@ -7,7 +7,7 @@ var getLowerCaseLetters = function () {
 
 var getSalt = function (len, set) {
 	len = len || 20;
-	set = set || '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZ -!$%?*()=_+|£¢@{}[];:';
+	set = set || '0123456789ABCDEFGHIJKLMNOPQURSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 	var	setLen = set.length,
 		salt = '';
 	for (var i = 0; i < len; i++) {
@@ -20,6 +20,13 @@ var getSalt = function (len, set) {
 const FREESTONE = 'Freestone';
 const WORDPRESS = 'WordPress';
 const STATIC = 'Statique';
+
+const dbCredentials = {
+	dbPassLocal: getSalt(16),
+	dbPassDev: getSalt(16),
+	dbPassStaging: getSalt(16),
+	tablePrefix: getSalt(6, getLowerCaseLetters()),
+}
 module.exports = class extends Generator {
 	constructor(args, opts) {
 		super(args, opts);
@@ -34,6 +41,12 @@ module.exports = class extends Generator {
 				name: "projectName",
 				message: "Nom du projet",
 				default: this.appname,
+			},
+			{
+				type: "input",
+				name: "projectURL",
+				message: "URL du projet",
+				default: ({projectName}) => _.kebabCase(projectName) + '.master.local.enclos.ca',
 			},
 			{
 				type: "list",
@@ -64,21 +77,19 @@ module.exports = class extends Generator {
 			projectPhpNamespace: _.startCase(_.camelCase(this.props.projectName)).replace(' ', ''),
 			salt: getSalt(),
 			secret: getSalt(65),
-			dbPassLocal: getSalt(16),
-			dbPassDev: getSalt(16),
-			dbPassStaging: getSalt(16),
+			...dbCredentials,
 		};
 
 		this.wordpressProps = {
-			authKey: getSalt(64),
-			secureAuthKey: getSalt(64),
-			loggedInKey: getSalt(64),
-			nonceKey: getSalt(64),
-			authSalt: getSalt(64),
-			secureAuthSalt: getSalt(64),
-			loggedInSalt: getSalt(64),
-			nonceSalt: getSalt(64),
-			tablePrefix: getSalt(6, getLowerCaseLetters()),
+			// authKey: getSalt(64),
+			// secureAuthKey: getSalt(64),
+			// loggedInKey: getSalt(64),
+			// nonceKey: getSalt(64),
+			// authSalt: getSalt(64),
+			// secureAuthSalt: getSalt(64),
+			// loggedInSalt: getSalt(64),
+			// nonceSalt: getSalt(64),
+			...dbCredentials,
 		};
 
 		this.fs.copyTpl(
@@ -129,10 +140,10 @@ module.exports = class extends Generator {
 				},
 			);
 
-			this.fs.copy(
-				this.templatePath('wordpress/dist/wp-content/plugins'),
-				this.destinationPath('dist/wp-content/plugins'),
-			);
+			// this.fs.copy(
+			// 	this.templatePath('wordpress/dist/wp-content/plugins'),
+			// 	this.destinationPath('dist/wp-content/plugins'),
+			// );
 		}
 
 		if (this.props.tech === STATIC) {
@@ -152,10 +163,44 @@ module.exports = class extends Generator {
 	
 	install() {
 		if (this.props.tech === WORDPRESS) {
-			this.spawnCommand('wp', ['core', 'download', '--path=dist/', '--skip-content']);
+			const dbname = _.kebabCase(this.props.projectName) + '_master_local';
+
+			this.spawnCommandSync('ssh', ['local.enclos.ca', 'bash', `~/create-database.sh "${dbname}" "${dbname}" "${this.wordpressProps.dbPassLocal}"`]);
+
+			this.spawnCommandSync('wp', [
+				'core',
+				'download',
+				'--path=dist/',
+				'--skip-content',
+			]);
+			
+			this.spawnCommandSync('wp', [
+				'config',
+				'create',
+				`--dbname=${dbname}`,
+				`--dbuser=${dbname}`,
+				`--dbpass=${this.wordpressProps.dbPassLocal}`,
+				`--dbhost=local.enclos.ca`,
+				`--dbprefix=${dbCredentials.tablePrefix}`,
+				`--path=./dist`
+			]);
+
+			this.spawnCommandSync('wp', [
+				'core',
+				'install',
+				`--url=${this.props.projectURL}`,
+				`--title=${this.props.projectName}`,
+				'--admin_user=admin',
+				'--prompt=admin_email,admin_password',
+				`--path=./dist`
+			]);
+			
+			this.spawnCommand('npm', ['run', 'vhost']);
 		}
 		
-		this.installDependencies();
+		// this.installDependencies({
+		// 	bower: false,
+		// });
 	}
 
 	end() {
