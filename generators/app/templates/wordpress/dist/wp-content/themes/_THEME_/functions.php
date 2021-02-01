@@ -2,6 +2,9 @@
 
 require_once(dirname( __FILE__ ) . '/lagrange/autoload.php');
 require_once(dirname( __FILE__ ) . '/lagrange/Utils.php');
+require_once(dirname( __FILE__ ) . '/lagrange/IncludeWith.php');
+require_once(dirname( __FILE__ ) . '/lagrange/FormatDate.php');
+require_once(dirname( __FILE__ ) . '/lagrange/Slugify.php');
 
 use LaGrange\DataStructure\ContentBlocks;
 use LaGrange\DataStructure\ACF;
