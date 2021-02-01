@@ -173,6 +173,10 @@ module.exports = class extends Generator {
 				'--path=dist/',
 				'--skip-content',
 			]);
+
+			//TODO: Create config not working ?
+			//TODO: Create plugins folder
+			//TODO: Select Theme
 			
 			this.spawnCommandSync('wp', [
 				'config',
@@ -194,6 +198,8 @@ module.exports = class extends Generator {
 				'--prompt=admin_email,admin_password',
 				`--path=./dist`
 			]);
+
+			//TODO: Install plugins here
 			
 			this.spawnCommand('npm', ['run', 'vhost']);
 		}
