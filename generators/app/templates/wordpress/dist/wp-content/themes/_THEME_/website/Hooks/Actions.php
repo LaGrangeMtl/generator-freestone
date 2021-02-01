@@ -15,7 +15,7 @@ class Actions {
 	}
 
 	static function add_reusable_blocks_admin_menu() {
-		add_menu_page( 'Bloc reutilisable', 'Blocs reutilisables', 'edit_posts', 'edit.php?post_type=wp_block', '', 'dashicons-networking', 22 );
+		add_menu_page( 'Reusable blocks', 'Reusable blocks', 'edit_posts', 'edit.php?post_type=wp_block', '', 'dashicons-networking', 22 );
 	}
 
 	static function register_menus() {

@@ -21,6 +21,24 @@ class Website {
 		Taxonomies::init();
 		PostTypes::init();
 		ContentBlocks::registerAll();
+		ContentBlocks::filterWPBlocks([
+			'post' => [
+				'core/code',
+				'core/shortcode',
+				'core/embed',
+				'core/freeform',
+				'core/block',
+				'core/template',
+				'core/image'
+			],
+			'page' => [
+				'core/code',
+				'core/shortcode',
+				'core/embed',
+				'core/block',
+				'core/template'
+			],
+		]);
 		RestEndpoints::init();
 
 		Filters::addAll();

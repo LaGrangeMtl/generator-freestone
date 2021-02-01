@@ -1,29 +1,46 @@
 <?php
-
 namespace LaGrange\DataStructure;
 
 class ContentBlocks {
-	public static function registerAll() {
-		$dir = opendir(dirname( __FILE__ ) . '/../../website/Blocks');
+	public static $blocks = [];
+	public static $included_blocks = [];
 
+	public static function registerAll() {
+		remove_theme_support( 'core-block-patterns' );
+		$dir = opendir(dirname( __FILE__ ) . '/../../website/Blocks');
 		while (false !== ($className = readdir($dir))) {
 			if ($className != "." && $className != "..") {
 				$resolvedModule = str_replace(".php", "", "\Website\Blocks\\$className");
-
-				add_action('acf/init', function() use ($resolvedModule) {
-					$r = new \ReflectionClass($resolvedModule);
-					$block = $r->newInstanceArgs();
-					$args = array_merge(
-						[
-							'render_callback' => [$block, 'render'],
-						],
-						isset($block->args) ? $block->args : []
-					);
+				$module = new \ReflectionClass($resolvedModule);
+				$block = $module->newInstanceArgs();
+				$args = array_merge(
+					[
+						'render_callback' => [$block, 'render'],
+					],
+					isset($block->args) ? $block->args : []
+				);
+				self::$blocks[] = 'acf/' . $module->getConstant('slug');
+				add_action('acf/init', function() use ($args, $block) {
 					acf_register_block_type($args);
+					$block->createFields();
 				});
 			}
 		}
-
 		closedir($dir);
+	}
+	/**
+	 * @param $included assoc array containing a map of post_types and allowed blocks.
+	 */
+	public static function filterWPBlocks($included = []) {
+		self::$included_blocks = $included;
+		add_filter( 'allowed_block_types', [get_called_class(), 'allowed_block_types'], 10, 2 );
+	}
+	// In Guttenberg, show all custom blocks + some WP blocks added in the $included_blocks
+	public static function allowed_block_types( $allowed_block_types, $post ) {
+		$included = get(self::$included_blocks, $post->post_type, []);
+		if (array_search('only', $included) !== FALSE) {
+			return $included;
+		}
+		return array_merge([], self::$blocks);
 	}
 }
