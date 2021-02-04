@@ -70,4 +70,25 @@ class Title {
 		$endtag = '</' . $rootTag . '>';
 		return $tag . $content . $endtag;
 	}
+
+	/**
+	 * getBlockLevel
+	 * 
+	 * return if the block is the first one of the page.
+	 *
+	 * @param string $blockId id of the block you want to know if it's the first one
+	 * @param object $post wordpress post object
+	 * @return bool return true if it's the first block of the page.
+	 */
+
+	static function getBlockLevel($blockId, $post) {
+		if(has_blocks($post->post_content)) {
+			$blocks = parse_blocks($post->post_content);
+			$first_block_attrs = $blocks[0]['attrs'];
+	
+			if(array_key_exists('id', $first_block_attrs)) {
+				return $blockId === $first_block_attrs['id'];
+			}
+		}
+	}
 }
