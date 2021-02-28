@@ -4,8 +4,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-# TODO check if composer install has run.
+# Composer
+if (!is_dir(__DIR__ . '/vendor')) {
+	echo "Missing vendor directory. Did you forget to run composer install?";
+	exit;
+}
 
 # Autoload
 $root = __DIR__ . '/vendor/la-grange/freestone-backend';
