@@ -161,10 +161,11 @@ module.exports = class extends Generator {
 	}
 	
 	install() {
-		if (this.props.tech === WORDPRESS) {
-			const dbname = _.kebabCase(this.props.projectName) + '_master_local';
-
+		const dbname = _.kebabCase(this.props.projectName) + '_master_dev';
+		if (this.props.tech !== STATIC) {
 			this.spawnCommandSync('ssh', ['dev.enclos.ca', 'bash', `~/create-database.sh "${dbname}" "${dbname}" "${this.wordpressProps.dbPassDev}"`]);
+		}
+		if (this.props.tech === WORDPRESS) {
 
 			this.spawnCommandSync('wp', [
 				'core',
