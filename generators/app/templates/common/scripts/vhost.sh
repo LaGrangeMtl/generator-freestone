@@ -18,8 +18,7 @@ else
 	vhost_root="$2"
 fi
 
-vhost_root_public_html= "$(echo vhost_root | sed 's/dist/public_html/')"
-
+vhost_root_public_html="$(echo $vhost_root | sed 's/dist/public_html/')"
 
 echo Updating /etc/hosts...
 ipv6=::1
