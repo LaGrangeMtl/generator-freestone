@@ -22,7 +22,6 @@ const WORDPRESS = 'WordPress';
 const STATIC = 'Statique';
 
 const dbCredentials = {
-	dbPassLocal: getSalt(16),
 	dbPassDev: getSalt(16),
 	dbPassStaging: getSalt(16),
 	tablePrefix: getSalt(6, getLowerCaseLetters()),
@@ -46,7 +45,7 @@ module.exports = class extends Generator {
 				type: "input",
 				name: "projectURL",
 				message: "URL du projet",
-				default: ({projectName}) => _.kebabCase(projectName) + '.master.local.enclos.ca',
+				default: ({projectName}) => _.kebabCase(projectName) + '.master.dev.enclos.ca',
 			},
 			{
 				type: "list",
@@ -165,7 +164,7 @@ module.exports = class extends Generator {
 		if (this.props.tech === WORDPRESS) {
 			const dbname = _.kebabCase(this.props.projectName) + '_master_local';
 
-			this.spawnCommandSync('ssh', ['local.enclos.ca', 'bash', `~/create-database.sh "${dbname}" "${dbname}" "${this.wordpressProps.dbPassLocal}"`]);
+			this.spawnCommandSync('ssh', ['dev.enclos.ca', 'bash', `~/create-database.sh "${dbname}" "${dbname}" "${this.wordpressProps.dbPassDev}"`]);
 
 			this.spawnCommandSync('wp', [
 				'core',
@@ -183,8 +182,8 @@ module.exports = class extends Generator {
 				'create',
 				`--dbname=${dbname}`,
 				`--dbuser=${dbname}`,
-				`--dbpass=${this.wordpressProps.dbPassLocal}`,
-				`--dbhost=local.enclos.ca`,
+				`--dbpass=${this.wordpressProps.dbPassDev}`,
+				`--dbhost=dev.enclos.ca`,
 				`--dbprefix=${dbCredentials.tablePrefix}`,
 				`--path=./dist`
 			]);
