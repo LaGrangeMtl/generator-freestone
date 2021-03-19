@@ -1,12 +1,7 @@
 {
 	"presets": [
-		["@babel/preset-env", {
-		  "targets": {
-			"browsers": {
-			  "ie": "11"
-			}
-		  },
-		}]
+		"@babel/env",
+		"@babel/react"
 	],
 	"plugins": [
 		"@babel/plugin-proposal-class-properties",
