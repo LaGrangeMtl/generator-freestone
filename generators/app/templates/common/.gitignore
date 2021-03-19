@@ -35,6 +35,7 @@ _optimization
 db/sync
 _workdir
 .ssl
+.parcel-cache
 
 dist/uploads/img/[0-9]*prc
 dist/uploads/img-tiny
