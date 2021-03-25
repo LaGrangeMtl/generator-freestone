@@ -66,10 +66,10 @@ RewriteRule ^c/[a-z0-9_\-]+/views/.*$ - [F,L]
 
 # image de banque resizés
 RewriteCond %{QUERY_STRING} !notiny
-RewriteRule ([^/]+)/uploads/(img)/(\d+prc/)?(.*)$ $1/uploads/$2-tiny/$3/$4 [L]
+RewriteRule ([^/]+)?/?uploads/(img)/(\d+prc/)?(.*)$ $1/uploads/$2-tiny/$3/$4 [L]
 
 # si 100%, file par defaut
-RewriteRule ([^/]+)/uploads/(img)(-tiny)?/100prc/(.*)$ $1/uploads/$2$3/$4 [L]
+RewriteRule ([^/]+)?/?uploads/(img)(-tiny)?/100prc/(.*)$ $1/uploads/$2$3/$4 [L]
 
 # si autre size et existe pas, procedure de resize
 RewriteCond %{REQUEST_URI} !uploads/(zva_bank_img\.file-tiny|img-tiny)
@@ -79,7 +79,7 @@ RewriteRule (zva_bank_img\.file|img)/(.*)$ imageBank.php?/$2 [QSA,L]
 # si l'image tiny existe pas, rewrite pour la PAS tiny et prevent de redemander le tiny quand le htaccess reparsera (il est reparsé à chaque fois qu'une de ses rules match)
 RewriteCond %{REQUEST_URI} uploads/(zva_bank_img\.file-tiny|img-tiny)
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ([^/]+)/uploads/(zva_bank_img\.file|img)-tiny/(.*)$ c/$1/uploads/$2/$3?notiny  [L]
+RewriteRule ([^/]+)?/?uploads/(zva_bank_img\.file|img)-tiny/(.*)$ c/$1/uploads/$2/$3?notiny  [L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
