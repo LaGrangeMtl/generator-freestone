@@ -35,6 +35,9 @@ VEnv::$cacheConfig = [
 VEnv::$forceWww = false;
 VEnv::$isDev = true;
 
+VEnv::$ssoAdminURL = 'https://sso.enclos.ca/admin';
+VEnv::$ssoApiURL = 'https://sso.enclos.ca/fsapi/authentication/validate-ticket';
+
 class ClientSettings extends AbstractClientSettings {
 
 	public static $settings = [

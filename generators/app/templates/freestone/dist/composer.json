@@ -10,6 +10,6 @@
 		}
 	],
 	"require": {
-		"la-grange/freestone-backend": "3.4.4"
+		"la-grange/freestone-backend": "3.5.6"
 	}
 }
