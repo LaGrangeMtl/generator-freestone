@@ -11,6 +11,7 @@ class Filters {
 	static function addAll() {
 		add_filter('body_class', [get_called_class(), 'add_slug_body_class']);
 		add_filter('the_content',[get_called_class(), 'add_lazy_load_attributes']);
+		add_filter('upload_mimes', [get_called_class(), 'cc_mime_types']);
 	}
 
 	static function add_slug_body_class($class) {
@@ -30,4 +31,9 @@ class Filters {
 		$content = str_replace('<iframe','<iframe loading="lazy"', $content);
 		return $content;
 	}
-}
+	
+	static function cc_mime_types($mimes) {
+		$mimes['svg'] = 'image/svg+xml';
+		return $mimes;
+	}
+}	

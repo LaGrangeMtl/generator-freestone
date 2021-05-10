@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 function slugify($string, $allowSlash = false){
 	$string = transformAccents($string);

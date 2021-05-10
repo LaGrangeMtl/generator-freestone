@@ -3,15 +3,17 @@
 namespace Website\Blocks;
 
 use LaGrange\DataStructure\Block;
+use Website\Modules\Buttons;
 
 class TestBlock implements Block {
 	const slug = 'kauysgdfjysdhvkb';
+	const title = 'Test Block';
 
 	function __construct() {
 		$this->args = [
 			'name'              => self::slug,
-			'title'             => 'Test Block',
-			'description'       => 'Test Block',
+			'title'             => self::title,
+			'description'       => self::title,
 			'category'          => 'formatting',
 			'icon'              => 'admin-comments',
 			'keywords'          => array('test-block'),
@@ -19,12 +21,41 @@ class TestBlock implements Block {
 	}
 
 	public function render($block, $content = '', $is_preview = false, $post_id = 0) {
-		TestBlock::template();
+		$fields = get_fields();
+		TestBlock::template($fields, null);
 	}
 
-	static public function template(/* list of template params */) {
+	static public function template($fields, $titles) {
+			$buttons = get($fields, 'buttons');
 		?>
 			Test in template
+
+			<?php foreach ($buttons as $button): ?>
+				<?php Buttons::renderButton($button); ?>
+			<?php endforeach; ?>
 		<?php
+	}
+
+	static public function getFields() {
+		return [
+			Buttons::getButtonsField(self::slug),
+		];
+	}
+
+	static public function createFields() {
+		acf_add_local_field_group(array(
+			'key' => 'group_' . self::slug,
+			'title' => 'Content Block : ' . self::title,
+			'fields' => self::getFields(),
+			'location' => array(
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/' . self::slug,
+					),
+				),
+			),
+		));
 	}
 }
