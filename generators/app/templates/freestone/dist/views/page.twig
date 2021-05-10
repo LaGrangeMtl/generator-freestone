@@ -7,17 +7,9 @@
 {% extends "layouts/default.twig" %}
 
 {% block head %}
-	{% set defaultShare = {
-		title: page.og_title_lng|default(page.title_lng ~ ' | ' ~ settings.site_name),
-		description: page.og_description_lng,
-		url: fs_link({}),
-		image: fs_src(page.og_image, 1200) ? fs_src(page.og_image, 1200) : null,
-		noindex: page.noindex,
-	} %}
 
-	{{ include('partials/share-metas.twig', defaultShare) }}
+	{{ include('partials/share-metas.twig') }}
 
-	<title>{{ page.title_lng }} | {{ settings.site_name }}</title>
 {% endblock head %}
 
 {% block content %}

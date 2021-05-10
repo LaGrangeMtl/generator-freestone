@@ -28,7 +28,7 @@ VEnv::$secret = '<%= props.secret %>';
 VEnv::$api['google']['clientId'] = 'key.apps.googleusercontent.com';
 
 VEnv::$cacheConfig = [
-	'life' => 3600,
+	'life' => 0,
 	'noCacheVars' => false,
 ];
 

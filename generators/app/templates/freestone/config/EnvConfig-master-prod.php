@@ -10,6 +10,11 @@ VEnv::$dbPass = '';
 VEnv::$isDev = false;
 VEnv::$forceWww = true;
 
+VEnv::$cacheConfig = [
+	'life' => 86000,
+	'noCacheVars' => false,
+];
+
 ClientSettings::$settings['site_name'] = '<%= props.projectName %>';
 ClientSettings::$settings['regions']['ca']['tld'] = 'ca';
 ClientSettings::$settings['regions']['ca']['use_region_as_prefix'] = false;
