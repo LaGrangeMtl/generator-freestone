@@ -8,6 +8,7 @@ require_once(dirname( __FILE__ ) . '/lagrange/Slugify.php');
 
 use LaGrange\DataStructure\ContentBlocks;
 use LaGrange\DataStructure\ACF;
+use LaGrange\DataStructure\TextTranslations;
 use Website\DataStructure\PostTypes;
 
 use Website\Hooks\Filters;
@@ -20,6 +21,8 @@ class Website {
 		ACF::init();
 		Taxonomies::init();
 		PostTypes::init();
+		// TextTranslations::init(file_get_contents(__DIR__ . '/website/DataStructure/TextTranslationsSchema.json'));
+
 		ContentBlocks::registerAll();
 		ContentBlocks::filterWPBlocks([
 			'post' => [
