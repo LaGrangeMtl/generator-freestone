@@ -1,3 +1,4 @@
+echo "<?php define('ASSETS_VERSION', '`date '+%Y%m%d%H%M%S'`');" > ./dist/assets-version.php
 rm -rf /dist/wp-content/themes/<%= props.projectNamespace %>/assets/js
 rm -rf /dist/wp-content/themes/<%= props.projectNamespace %>/assets/css
 npm install
