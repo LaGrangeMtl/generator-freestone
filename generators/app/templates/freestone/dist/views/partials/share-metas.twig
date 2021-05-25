@@ -6,6 +6,7 @@
 {% set ogTitle = metas.og_title_lng ? metas.og_title_lng : (ogTitle ? ogTitle : title) %}
 {% set ogImage = metas.og_image ? fs_src(metas.og_image) : ogImage %}
 {% set otherMetas = metas.meta_misc_lng %}
+{% if metas.noindex %}<meta name="robots" content="noindex">{% endif %}
 
 <meta name="fb:app_id" content="{{ settings.facebook_appid }}" />
 <meta name="description" content="{{ description|default(tx.share_defaults.description) }}" />
