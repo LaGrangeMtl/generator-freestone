@@ -8,6 +8,12 @@ use LaGrange\DataStructure\ContentBlocks;
  * CustomPostType
  */
 class CustomTaxonomy {
+	const CLASS_NAME_FIELD = '__meta_class_name__';
+
+	public static function hide_class_name_field($field) {
+		return false;
+	}
+
 	/**
 	 * args
 	 *
@@ -73,15 +79,32 @@ class CustomTaxonomy {
 		foreach ($blocksClasses as $blockClass) {
 			$block = $blockClass->newInstanceArgs();
 
+			$className = $blockClass->getShortName();
 			$slug = $blockClass->getConstant('slug');
 			$title = $blockClass->getConstant('title');
 
-			$layouts['layout_' . $slug] = [
+			$fields =  array_merge(
+				$block::getFields(), 
+				[
+					[
+						'key' => 'field_' . $slug . '_class_name',
+						'label' => self::CLASS_NAME_FIELD,
+						'name' => self::CLASS_NAME_FIELD,
+						'type' => 'text',
+						'default_value' => $className,
+						'instruction_placement' => 'DO NOT CHANGE',
+						'disabled' => 1,
+						'hide_on_screen' => 1
+					]
+				]
+			);
+
+			$layouts['layout_' . $className] = [
 				'key' => 'layout_' . $slug . '_field',
 				'name' => $slug,
 				'label' => $title,
 				'display' => 'block',
-				'sub_fields' => $block::getFields(),
+				'sub_fields' => $fields,
 				'min' => '',
 				'max' => '',
 			];
@@ -121,6 +144,8 @@ class CustomTaxonomy {
 				];
 			}, $taxonomies)
 		));
+
+		add_filter( 'acf/prepare_field/name=' . self::CLASS_NAME_FIELD, [get_called_class(), 'hide_class_name_field']);
 	}
 }
 

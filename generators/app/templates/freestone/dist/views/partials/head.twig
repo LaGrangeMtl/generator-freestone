@@ -14,6 +14,8 @@
 <link rel="alternate" hreflang="{{ lang }}" href="{{ fs_link({l: lang}) }}" />
 
 <script>
+	document.querySelector('html').classList.add('has-js');
+
 	(function(ns){
 		ns.lang = '{{ lang }}';
 	})(window.<%= props.projectNamespace %> = window.<%= props.projectNamespace %> || {});
