@@ -22,10 +22,10 @@ class TestBlock implements Block {
 
 	public function render($block, $content = '', $is_preview = false, $post_id = 0) {
 		$fields = get_fields();
-		TestBlock::template($fields, null);
+		TestBlock::template($fields, 1);
 	}
 
-	static public function template($fields, $titles) {
+	static public function template($fields, $startingTitleLevel) {
 			$buttons = get($fields, 'buttons');
 		?>
 			Test in template
