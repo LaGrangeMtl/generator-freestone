@@ -16,6 +16,18 @@ class Hooks {
 	 * @return array
 	 */
 	public static function modifyImageBankItemAttrs($attrs, $infos) {
-		return array_merge($attrs, ['loading="lazy"']);
+		// Shenanigans to check if we're not in the admin
+		if (Website::$id) {
+			if ($infos['_type'] !== 'svg' && strpos($infos['file'], 'svg') === FALSE) {
+				$attrs[] = 'loading="lazy"';
+			}
+			if ($infos['_width']) {
+				$attrs[] = 'width="'. $infos['_width'] .'"';
+			}
+			if ($infos['_height']) {
+				$attrs[] = 'height="'. $infos['_height'] .'"';
+			}
+		}
+		return $attrs;
 	}
 }
