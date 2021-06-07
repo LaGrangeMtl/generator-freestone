@@ -1,13 +1,26 @@
+{% set metas = fs_meta() %}
+
+{% set title = metas.meta_title_lng ? metas.meta_title_lng : title %}
+{% set description = metas.meta_description_lng ? metas.meta_description_lng : description %}
+{% set ogDescription = metas.og_description_lng ? metas.og_description_lng : (ogDescription ? ogDescription : description) %}
+{% set ogTitle = metas.og_title_lng ? metas.og_title_lng : (ogTitle ? ogTitle : title) %}
+{% set ogImage = metas.og_image ? fs_src(metas.og_image) : ogImage %}
+{% set otherMetas = metas.meta_misc_lng %}
+{% if metas.noindex %}<meta name="robots" content="noindex">{% endif %}
 
 <meta name="fb:app_id" content="{{ settings.facebook_appid }}" />
-<meta name="twitter:text:description" content="{{ title|default(tx.share_defaults.twitter_desc) }}" />
+<meta name="description" content="{{ description|default(tx.share_defaults.description) }}" />
 
 <meta property="og:site_name" content="{{ settings.site_name }}" />
 <meta property="og:type" content="{{ type|default('website') }}" />
 
-<meta property="og:description" content="{{ description|striptags|default(tx.share_defaults.description) }}" />
+<meta property="og:description" content="{{ ogDescription|striptags|default(tx.share_defaults.description) }}" />
 <meta property="og:url" content="{{ url|default(fs_link({})) }}" />
-<meta property="og:title" content="{{ title|default(tx.share_defaults.title) }}" />
-<meta property="og:image" content="{{ 'http:' ~ image|default(dir ~ '/img/share-default.jpg') }}" />
+<meta property="og:title" content="{{ ogTitle|default(tx.share_defaults.title) }}" />
+<meta property="og:image" content="{{ ogImage|default(tx.share_defaults.image) }}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+{{otherMetas|raw}}
+
+<title>{{ title }} | {{ settings.site_name }}</title>
+ 

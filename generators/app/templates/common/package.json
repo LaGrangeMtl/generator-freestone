@@ -37,5 +37,13 @@
 		"transformation-matrix": "^2.0.5",
 		"virtual-scroll": "^1.5.2",
 		"intersection-observer": "^0.11.0"
+	},
+	"targets": {
+		"main": {
+			"sourceMap": {
+				"inline": true,
+				"inlineSources": true
+			}
+		}
 	}
 }

@@ -14,7 +14,8 @@ VEnv::$client = '<%= props.projectNamespace %>';
 VEnv::$siteName = '<%= props.projectName %>';
 
 // Assets version to prevent cache.
-VEnv::$assetsVersion = '0';
+require_once(__DIR__.'/../assets-version.php');
+VEnv::$assetsVersion = ASSETS_VERSION;
 
 VEnv::$defaultID = 1;
 VEnv::$defaultLang = 'fr';
@@ -28,7 +29,7 @@ VEnv::$secret = '<%= props.secret %>';
 VEnv::$api['google']['clientId'] = 'key.apps.googleusercontent.com';
 
 VEnv::$cacheConfig = [
-	'life' => 3600,
+	'life' => 0,
 	'noCacheVars' => false,
 ];
 
