@@ -1,6 +1,7 @@
 <?php
 
 namespace Freestone;
+use Freestone\Frontendv2\Website;
 
 class Hooks {
 
