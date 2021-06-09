@@ -9,5 +9,5 @@ interface Block {
 
 	static public function createFields();
 	
-	static public function template(array|object $fields, int $startingTitleLevel);
+	static public function template(array|object $fields, int $startingTitleLevel, bool $isPreview);
 }
