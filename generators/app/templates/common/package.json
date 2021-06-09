@@ -6,7 +6,8 @@
 	"scripts": {
 		"watch": "sh scripts/watch.sh",
 		"build": "sh scripts/build.sh",
-		"vhost": "bash scripts/vhost.sh"
+		"vhost": "bash scripts/vhost.sh",
+		"pull": "bash scripts/pull.sh"
 	},
 	"keywords": [],
 	"author": "La Grange",

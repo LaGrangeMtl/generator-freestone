@@ -47,7 +47,7 @@ dist/assets/js/index.js.map
 dist/assets/css/index-wysiwyg.css
 dist/assets/css/index-wysiwyg.css.map
 
-dist/wp-content/uploads/2020
+dist/wp-content/uploads/202[0-9]
 dist/wp-content/uploads/cache
 
 dist/wp-content/themes/<%= props.projectNamespace %>/assets/css/index.css
