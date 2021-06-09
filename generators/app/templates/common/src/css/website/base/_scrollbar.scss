@@ -2,7 +2,7 @@
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: var(--scrollbar-width);
+	width: var(--scrollbar-width, 4px);
 	height: 100vh;
 	height: calc(var(--vh, 1vh) * 100);
 	background: $black;
