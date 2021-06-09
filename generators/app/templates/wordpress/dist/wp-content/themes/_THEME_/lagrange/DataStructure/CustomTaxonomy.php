@@ -147,6 +147,33 @@ class CustomTaxonomy {
 
 		add_filter( 'acf/prepare_field/name=' . self::CLASS_NAME_FIELD, [get_called_class(), 'hide_class_name_field']);
 	}
+
+	/**
+	 * Prints the blocks set in the $contentField of the taxonomy.
+	 * 
+	 * @param WPQuery $wp_query The current WPQuery.
+	 * @param string $contentField The flexible content field on the current taxonomy. Defaults to `'content'`.
+	 */
+	public static function getBlocksFromFlexibleContent($wp_query, $contentField = 'content') {
+		$taxonomy = $wp_query->get_queried_object();
+		$content = get_field($contentField, $taxonomy);
+
+		if ($content) {
+			$index = 0;
+
+			while(have_rows('content', $taxonomy)) {
+				the_row();
+				$fields = $content[$index];
+				$className = get($fields, CustomTaxonomy::CLASS_NAME_FIELD);
+			
+				$resolvedBlock = str_replace(".php", "", "\Website\Blocks\\$className");
+				$method = new \ReflectionMethod($resolvedBlock, 'template');
+						
+				$method->invoke(null, $fields, $index === 0 ? 1 : 2);
+				$index++;
+			}
+		}
+	}
 }
 
 ?>
