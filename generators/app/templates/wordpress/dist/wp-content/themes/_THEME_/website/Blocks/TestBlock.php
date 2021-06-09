@@ -4,6 +4,7 @@ namespace Website\Blocks;
 
 use LaGrange\DataStructure\Block;
 use Website\Modules\Buttons;
+use LaGrange\Markup\Title;
 
 class TestBlock implements Block {
 	const slug = 'kauysgdfjysdhvkb';
@@ -22,10 +23,12 @@ class TestBlock implements Block {
 
 	public function render($block, $content = '', $is_preview = false, $post_id = 0) {
 		$fields = get_fields();
-		TestBlock::template($fields, null);
+		$startingTitleLevel = Title::getBlockLevel($block['id'], get_post()) ? 1 : 2;
+
+		self::template($fields, $startingTitleLevel, $is_preview);
 	}
 
-	static public function template($fields, $titles) {
+	static public function template($fields, $startingTitleLevel, $isPreview = false) {
 			$buttons = get($fields, 'buttons');
 		?>
 			Test in template
