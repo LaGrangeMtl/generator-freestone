@@ -39,6 +39,7 @@ _workdir
 
 dist/assets-version.php
 dist/config/EnvConfig.php
+dist/config.php
 
 dist/uploads/img/[0-9]*prc
 dist/uploads/img-tiny
