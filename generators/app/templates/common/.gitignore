@@ -37,6 +37,9 @@ _workdir
 .ssl
 .parcel-cache
 
+dist/assets-version.php
+dist/config/EnvConfig.php
+
 dist/uploads/img/[0-9]*prc
 dist/uploads/img-tiny
 
