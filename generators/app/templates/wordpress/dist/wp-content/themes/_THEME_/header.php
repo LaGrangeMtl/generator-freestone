@@ -12,6 +12,13 @@
 		<? wp_head(); ?>
 
 		<link rel="stylesheet" href="<? echo esc_url(get_template_directory_uri()); ?>/assets/css/index.css<? echo $version ?>">
+
+		<script>
+			document.querySelector('html').classList.add('has-js');
+			(function(ns){
+				ns.lang = '{{ lang }}';
+			})(window.<%= props.projectNamespace %> = window.<%= props.projectNamespace %> || {});
+		</script>
 	</head>
 
 	<body <? body_class(); ?>>
