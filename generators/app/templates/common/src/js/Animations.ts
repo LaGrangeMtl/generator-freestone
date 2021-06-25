@@ -1,7 +1,7 @@
 'format es6';
 'use strict';
 
-import Animator from '@lagrange/animator';
+import Animator from './Animator';
 
 const {
 	ELEM_BOTTOM,
@@ -10,11 +10,14 @@ const {
 	SCREEN_BOTTOM,
 	SCREEN_CENTER,
 	SCREEN_TOP,
+	SCREEN_RIGHT,
 } = Animator.getConstants();
 
 export const Animations = {
 	get(width) {
-		const animations = {};
+		const animations:AnimatorAnimations = {
+
+		};
 
 		return animations;
 	},

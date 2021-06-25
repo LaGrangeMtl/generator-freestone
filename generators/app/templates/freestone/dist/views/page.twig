@@ -1,6 +1,6 @@
 {% set page = fs_query({
 	table: "page",
-	recordId: rootId,
+	where: ['id=' ~ rootId],
 	debug: false,
 }) %}
 

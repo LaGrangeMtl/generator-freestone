@@ -1,47 +1,27 @@
-import Animator from '@lagrange/animator';
 import gsap, { Power3 } from 'gsap';
+import Animator from '../Animator';
 import offset from '../utils/offset';
 
 import Scroller, { NATIVE_SCROLLER } from './Scroller';
 
-const scrollingElement = document.scrollingElement || document.documentElement;
+const scrollingElement = (document.scrollingElement || document.documentElement) as HTMLElement;
 
 const defaults = {
 	offset: 0,
 	duration: 0.9,
 	delay: 0,
+	ease: null,
 	container: scrollingElement,
-	onUpdate: () => {},
+	onUpdate: (st) => {},
 	onComplete: () => {},
 };
 
 export class NativeScroller extends Scroller {
-	/** @type {HTMLElement} */
-	el = null;
-
-	height = 0;
-	
-	scrolltop = 0;
-
-	lastScrollTop = 0;
-
-	targetScrollTop = 0;
-
 	freezeScroll = false;
 
-	loop = null;
-
-	/** @type {HTMLElement[]} */
-	sections = [];
-
-	/** @type {ScrollModule[]} */
-	sectionModules = [];
-
-	/**
-	 * @param {HTMLElement} el 
-	 */
-	constructor(el = scrollingElement, id = '') {
+	constructor(el:HTMLElement = scrollingElement, id = '') {
 		super(NATIVE_SCROLLER);
+
 		this.el = el || scrollingElement;
 		this.id = id;
 

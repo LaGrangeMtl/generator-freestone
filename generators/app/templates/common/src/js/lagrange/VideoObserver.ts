@@ -1,6 +1,6 @@
 const videoObserver = new IntersectionObserver((entries) => {
 	entries.forEach(entry => {
-		const { target } = entry;
+		const target = entry.target as HTMLVideoElement;
 		if (!entry.isIntersecting && !target.paused) {
 			target.pause();
 		} else if (entry.isIntersecting && target.paused) {

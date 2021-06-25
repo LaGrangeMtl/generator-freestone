@@ -1,5 +1,4 @@
 import gsap, { Power2 } from 'gsap';
-import offset from './offset.js';
 
 const defaults = {
 	offset: 0,

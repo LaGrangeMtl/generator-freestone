@@ -1,6 +1,11 @@
 const tolerance = 0.05;
 
 class SyncedUpdate {
+	loop: number;
+	previousDelta: number;
+	fps: number;
+	callback: Function;
+
 	constructor(targetFps, callback) {
 		this.loop = null;
 		this.previousDelta = 0;
@@ -28,7 +33,7 @@ class SyncedUpdate {
 		}
 
 		if (this.callback) {
-			this.callback();
+			this.callback(currentDelta);
 		}
 
 		this.previousDelta = currentDelta;

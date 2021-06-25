@@ -2,31 +2,29 @@
 
 import 'intersection-observer';
 
-/**
- * @typedef {Object} ScrollModuleOptions
- * @property {Function} onWakeUp
- * @property {Function} onSleep
- */
+type ScrollModuleOptions = {
+	onWakeUp?: Function,
+	onSleep?: Function,
+	onUpdate?: Function,
+	threshold?: number|number[]
+}
 
-const defaultOptions = {};
+const defaultOptions:ScrollModuleOptions = {
+	onWakeUp: null,
+	onSleep: null,
+	onUpdate: null,
+};
 
 export default class ScrollModule {
 	wasIntersecting = false;
+	element:HTMLElement;
+	observer:IntersectionObserver;
 
-	/** @type {Function} */
-	onWakeUp = null;
+	onWakeUp:Function = null;
+	onSleep:Function = null;
+	onUpdate:Function = null;
 
-	/** @type {Function} */
-	onSleep = null;
-
-	/** @type {Function} */
-	onUpdate = null;
-
-	/**
-	 * @param {Element} element 
-	 * @param {ScrollModuleOptions} element 
-	 */
-	constructor(element, options = defaultOptions) {
+	constructor(element:HTMLElement, options = defaultOptions) {
 		this.element = element;
 		this.observer = new IntersectionObserver(this.onIntersectionCallback, options);
 
@@ -37,10 +35,7 @@ export default class ScrollModule {
 		this.observer.observe(this.element);
 	}
 
-	/**
-	 * @param {IntersectionObserverEntry[]} entries
-	 */
-	onIntersectionCallback = (entries) => {
+	onIntersectionCallback = (entries:IntersectionObserverEntry[]) => {
 		entries.forEach(
 			entry => {
 				if (!this.wasIntersecting && entry.isIntersecting) {

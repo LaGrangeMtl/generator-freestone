@@ -17,6 +17,9 @@
 		"@babel/plugin-proposal-class-properties": "^7.13.0",
 		"@babel/plugin-proposal-object-rest-spread": "^7.13.8",
 		"@babel/plugin-transform-object-assign": "^7.12.13",
+		"@typescript-eslint/eslint-plugin": "^4.28.0",
+		"@typescript-eslint/parser": "^4.28.0",
+		"@babel/preset-typescript": "^7.12.7",
 		"bootstrap-scss": "^4.3.1",
 		"cssnano": "^4.1.10",
 		"eslint": "^4.19.1",
@@ -26,13 +29,10 @@
 		"eslint-plugin-jsx-a11y": "^6.2.3",
 		"eslint-plugin-react": "^7.14.2",
 		"parcel": "^2.0.0-beta.2",
-		"sass": "^1.22.3"
+		"sass": "1.32.13"
 	},
 	"dependencies": {
-		"@lagrange/animator": "*",
-		"@lagrange/barba-core": "^2.3.21",
-		"Promise": "^1.0.5",
-		"bluebird": "^3.5.5",
+		"@barba/core": "^2.9.7",
 		"gsap": "^3.5.1",
 		"imagesloaded": "^4.1.4",
 		"transformation-matrix": "^2.0.5",
