@@ -43,7 +43,7 @@ VEnv::$ssoApiURL = 'https://sso.enclos.ca/fsapi/authentication/validate-ticket';
 class ClientSettings extends AbstractClientSettings {
 
 	public static $settings = [
-		'site_name' => 'example',
+		'site_name' => '<%= props.projectName %>',
 		'fb_appid' => 'xxx',
 		'urchin' => 'UA-xxx',
 		'contentblocksLocation' => 'content-blocks/types',
