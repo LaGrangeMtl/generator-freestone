@@ -1,8 +1,8 @@
 <?php
 
-define( 'DB_HOST', 'dev.enclos.ca' );
-define( 'DB_NAME', '<%= props.projectName %>_master_dev' );
-define( 'DB_USER', '<%= props.projectName %>_master_dev' );
-define( 'DB_PASSWORD', '<%= props.dbPassDev %>' );
+define( 'DB_HOST', 'lcoalhost' );
+define( 'DB_NAME', '<%= props.projectName %>_master_local' );
+define( 'DB_USER', 'remote' );
+define( 'DB_PASSWORD', 'remote' );
 
 define( 'WP_DEBUG', true );
