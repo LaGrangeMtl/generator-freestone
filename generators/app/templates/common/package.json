@@ -4,8 +4,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"watch": "sh scripts/watch.sh",
-		"build": "sh scripts/build.sh",
+		"watch": "bash scripts/watch.sh",
+		"build": "bash scripts/build.sh",
 		"vhost": "bash scripts/vhost.sh",
 		"sync": "bash scripts/sync.sh"
 	},

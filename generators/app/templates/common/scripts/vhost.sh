@@ -1,10 +1,10 @@
 #!/bin/bash
 
 project=${PWD##*/}
+project=${project,,}
+project="$(echo ${project} | sed 's/wordpress-//')"
 branch=$(git symbolic-ref --short HEAD)
-suggested_site_name="${project,,}.$branch.dev.enclos.ca"
-suggested_site_name="$(echo $suggested_site_name | sed 's/wordpress-//')"
-
+suggested_site_name="${project}.${branch}.dev.enclos.ca"
 
 if [ -z "$1" ] ; then
 	read -r  -p "Enter a domain for this site: " -i "$suggested_site_name" -e site

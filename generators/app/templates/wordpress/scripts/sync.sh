@@ -2,6 +2,7 @@
 
 project=${PWD##*/}
 project=${project,,}
+project="$(echo ${project} | sed 's/wordpress-//')"
 
 if [ "$1" = "db"  ] || [ "$1" = "" ]; then
 	echo Sync Database

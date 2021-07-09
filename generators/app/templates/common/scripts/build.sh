@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 echo "<?php define('ASSETS_VERSION', '`date '+%Y%m%d%H%M%S'`');" > ./dist/assets-version.php
 npm install
 rm -rf dist/assets/js
