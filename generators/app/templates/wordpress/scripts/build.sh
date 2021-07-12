@@ -1,8 +1,6 @@
 #!/bin/bash
 
-project=${PWD##*/}
-project=${project,,}
-project="$(echo ${project} | sed 's/wordpress-//')"
+project=<%= props.projectName %>
 
 echo "<?php define('ASSETS_VERSION', '`date '+%Y%m%d%H%M%S'`');" > ./dist/assets-version.php
 rm -rf /dist/wp-content/themes/${project}/assets/js
