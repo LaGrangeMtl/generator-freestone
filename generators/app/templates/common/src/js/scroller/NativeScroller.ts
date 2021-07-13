@@ -34,15 +34,16 @@ export class NativeScroller extends Scroller {
 		window.addEventListener('scroll', this.debouncedUpdate);
 	}
 
-	debouncedUpdate = () => {
+	debouncedUpdate = (e) => {
 		cancelAnimationFrame(this.loop);
-		this.loop = requestAnimationFrame(this.update);
+		this.loop = requestAnimationFrame(() => this.update());
 	}
 
 	update = () => {
+		this.scrollTop = -window.scrollY;
 		Animator.instances.forEach(
 			(animator) => {
-				animator.virtualScroll(this.el, scrollingElement.scrollTop);
+				animator.virtualScroll(this.el, -this.scrollTop);
 			}
 		);
 		this.runCallbacks();
