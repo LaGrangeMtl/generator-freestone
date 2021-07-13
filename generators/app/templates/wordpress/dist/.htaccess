@@ -1,1 +1,16 @@
+RewriteRule ^wp\-admin https://<%= props.projectNamespace %>.master.dev.enclos.ca/wp-admin? [R=301,L]
+RewriteRule ^admin https://<%= props.projectNamespace %>.master.dev.enclos.ca/admin? [R=301,L]
+RewriteRule ^wp\-login https://<%= props.projectNamespace %>.master.dev.enclos.ca/wp-login.php? [R=301,L]
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
 php_value short_open_tag 1
