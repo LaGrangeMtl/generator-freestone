@@ -109,7 +109,14 @@ function matchesSelector(el, selector) {
 		const matcher = el.matchesSelector || el.mozMatchesSelector 
 		|| el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector;
 		
-		return matcher.call(el, selector);
+		let m;
+		
+		try {
+			m = matcher.call(el, selector);
+		} catch (e) {
+			// gobble selector errors
+		}
+		return m;
 	}
 
 	return false;
