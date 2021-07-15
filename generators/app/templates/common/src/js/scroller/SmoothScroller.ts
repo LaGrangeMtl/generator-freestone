@@ -169,7 +169,7 @@ export class SmoothScroller extends Scroller {
 				this.el.scrollTop = 0;
 				this.el.scrollLeft = 0;
 				// @ts-ignore
-				this.scrollToElem(document.activeElement, { offset: winDim.height / 2 }); 
+				this.scrollToElem(document.activeElement, { offset: -winDim.height / 2 }); 
 			});
 		}
 
